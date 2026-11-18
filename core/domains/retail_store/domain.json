@@ -1,0 +1,13 @@
+{
+  "schema_version": "isaac-scene-domain/v1",
+  "name": "retail_store",
+  "description": "Convenience stores and retail interiors with gondolas, checkout and merchandise zones.",
+  "triggers": {
+    "en": ["retail", "store", "shop", "checkout", "gondola shelf", "convenience store"],
+    "zh": ["零售", "商店", "便利店", "收银台", "货架", "卖场"]
+  },
+  "roles": ["room_shell", "gondola", "wall_shelf", "checkout", "refrigerated_display", "merchandise", "aisle", "camera"],
+  "search_libraries": ["asset_catalog", "grscenes_scenes", "isaac_official", "geniesim", "curated_common"],
+  "validation_profile": "retail_store",
+  "workflow": "workflow.md"
+}

@@ -1,0 +1,123 @@
+{
+  "schema_version": "isaac-room-shell-library/v1",
+  "coordinate_system": "translate_norm uses centered room XY and floor-to-ceiling Z; size_norm is relative to room dimensions",
+  "presets": {
+    "living_warm_v2": {
+      "domain": "home_scene",
+      "room_types": ["living_room", "family_room", "lounge"],
+      "description": "Warm object-free living-room shell with a real window opening assembled from wall segments, deep frames, baseboards, an inset entry door, ceiling coves and layered warm lighting.",
+      "surfaces": {
+        "floor": {"color_rgb": [0.34, 0.20, 0.10], "roughness": 0.62, "metallic": 0.0},
+        "walls": {"color_rgb": [0.78, 0.72, 0.64], "roughness": 0.78, "metallic": 0.0},
+        "ceiling": {"color_rgb": [0.86, 0.84, 0.78], "roughness": 0.74, "metallic": 0.0}
+      },
+      "open_sides": ["front", "left"],
+      "elements": [
+        {"id": "window_wall_front", "type": "box", "semantic_role": "wall_panel", "translate_norm": [-0.498, -0.36, 0.50], "size_norm": [0.010, 0.28, 1.0], "min_size_m": [0.06, 0.70, 0.0], "display_color": [0.78, 0.72, 0.64], "material_roughness": 0.78},
+        {"id": "window_wall_back", "type": "box", "semantic_role": "wall_panel", "translate_norm": [-0.498, 0.36, 0.50], "size_norm": [0.010, 0.28, 1.0], "min_size_m": [0.06, 0.70, 0.0], "display_color": [0.78, 0.72, 0.64], "material_roughness": 0.78},
+        {"id": "window_wall_sill", "type": "box", "semantic_role": "wall_panel", "translate_norm": [-0.498, 0.0, 0.155], "size_norm": [0.010, 0.44, 0.31], "min_size_m": [0.06, 1.10, 0.62], "display_color": [0.78, 0.72, 0.64], "material_roughness": 0.78},
+        {"id": "window_wall_header", "type": "box", "semantic_role": "wall_panel", "translate_norm": [-0.498, 0.0, 0.865], "size_norm": [0.010, 0.44, 0.27], "min_size_m": [0.06, 1.10, 0.54], "display_color": [0.78, 0.72, 0.64], "material_roughness": 0.78},
+        {"id": "side_window_glass", "type": "glass_panel", "semantic_role": "partition", "translate_norm": [-0.493, 0.0, 0.51], "size_norm": [0.006, 0.43, 0.43], "min_size_m": [0.04, 1.20, 1.15], "display_color": [0.30, 0.42, 0.50], "display_opacity": 0.20, "material_roughness": 0.08},
+        {"id": "window_frame_vertical", "type": "frame", "semantic_role": "mullion", "translate_norm": [-0.488, 0.0, 0.51], "size_norm": [0.010, 0.012, 0.46], "min_size_m": [0.055, 0.055, 1.20], "display_color": [0.12, 0.10, 0.08], "material_metallic": 0.25, "repeat": {"axis": "Y", "count": 3, "start_norm": -0.205, "end_norm": 0.205}},
+        {"id": "window_frame_horizontal", "type": "frame", "semantic_role": "mullion", "translate_norm": [-0.488, 0.0, 0.51], "size_norm": [0.010, 0.46, 0.016], "min_size_m": [0.055, 1.20, 0.055], "display_color": [0.12, 0.10, 0.08], "material_metallic": 0.25, "repeat": {"axis": "Z", "count": 3, "start_norm": 0.30, "end_norm": 0.72}},
+        {"id": "window_sill", "type": "beam", "semantic_role": "shell_other", "translate_norm": [-0.482, 0.0, 0.292], "size_norm": [0.026, 0.48, 0.025], "min_size_m": [0.16, 1.30, 0.07], "display_color": [0.28, 0.17, 0.10], "material_roughness": 0.46},
+        {"id": "back_baseboard", "type": "beam", "semantic_role": "baseboard", "translate_norm": [0.0, 0.488, 0.027], "size_norm": [0.97, 0.012, 0.054], "min_size_m": [0.0, 0.06, 0.12], "display_color": [0.30, 0.19, 0.11], "material_roughness": 0.56},
+        {"id": "right_baseboard", "type": "beam", "semantic_role": "baseboard", "translate_norm": [0.488, 0.0, 0.027], "size_norm": [0.012, 0.97, 0.054], "min_size_m": [0.06, 0.0, 0.12], "display_color": [0.30, 0.19, 0.11], "material_roughness": 0.56},
+        {"id": "entry_door_panel", "type": "box", "semantic_role": "wall_panel", "translate_norm": [0.31, 0.482, 0.345], "size_norm": [0.15, 0.018, 0.69], "min_size_m": [0.86, 0.09, 2.05], "display_color": [0.23, 0.12, 0.065], "material_roughness": 0.44},
+        {"id": "entry_door_side_frame", "type": "frame", "semantic_role": "shell_other", "translate_norm": [0.31, 0.472, 0.36], "size_norm": [0.012, 0.018, 0.73], "min_size_m": [0.07, 0.10, 2.16], "display_color": [0.10, 0.07, 0.05], "repeat": {"axis": "X", "count": 2, "start_norm": 0.23, "end_norm": 0.39}},
+        {"id": "entry_door_header", "type": "frame", "semantic_role": "shell_other", "translate_norm": [0.31, 0.472, 0.725], "size_norm": [0.18, 0.018, 0.025], "min_size_m": [1.00, 0.10, 0.08], "display_color": [0.10, 0.07, 0.05]},
+        {"id": "ceiling_cove_back", "type": "beam", "semantic_role": "soffit", "translate_norm": [0.0, 0.455, 0.945], "size_norm": [0.96, 0.07, 0.08], "min_size_m": [0.0, 0.30, 0.18], "display_color": [0.70, 0.66, 0.58], "material_roughness": 0.70},
+        {"id": "ceiling_cove_right", "type": "beam", "semantic_role": "soffit", "translate_norm": [0.455, 0.0, 0.945], "size_norm": [0.07, 0.96, 0.08], "min_size_m": [0.30, 0.0, 0.18], "display_color": [0.70, 0.66, 0.58], "material_roughness": 0.70},
+        {"id": "ceiling_light_panel", "type": "box", "semantic_role": "ceiling_rail", "translate_norm": [0.0, 0.0, 0.965], "size_norm": [0.24, 0.16, 0.018], "min_size_m": [1.10, 0.65, 0.055], "display_color": [0.96, 0.88, 0.68], "emissive_color": [0.32, 0.25, 0.15], "repeat": {"axis": "X", "count": 2, "start_norm": -0.22, "end_norm": 0.22}}
+      ],
+      "lighting": {
+        "mode": "text_guided",
+        "environment": {"enabled": true, "intensity": 760.0, "color": [0.78, 0.84, 1.0]},
+        "fixtures": [
+          {"id": "window_daylight", "type": "rect", "translate_norm": [-0.45, -0.02, 0.60], "look_at_norm": [0.0, 0.02, 0.24], "width_ratio": 0.08, "height_ratio": 0.42, "intensity": 2800.0, "color": [0.78, 0.88, 1.0]},
+          {"id": "warm_panel_left", "type": "rect", "translate_norm": [-0.22, 0.0, 0.93], "look_at_norm": [-0.10, 0.02, 0.10], "width_ratio": 0.20, "height_ratio": 0.24, "intensity": 4600.0, "color": [1.0, 0.84, 0.64]},
+          {"id": "warm_panel_right", "type": "rect", "translate_norm": [0.22, 0.0, 0.93], "look_at_norm": [0.10, 0.02, 0.10], "width_ratio": 0.20, "height_ratio": 0.24, "intensity": 4600.0, "color": [1.0, 0.84, 0.64]},
+          {"id": "open_front_fill", "type": "rect", "translate_norm": [0.0, -0.46, 0.58], "look_at_norm": [0.0, 0.02, 0.22], "width_ratio": 0.34, "height_ratio": 0.30, "intensity": 1900.0, "color": [1.0, 0.90, 0.76]}
+        ]
+      }
+    },
+    "office_glazed_v1": {
+      "domain": "generic_scene",
+      "room_types": ["office", "executive_office", "meeting_room"],
+      "description": "Corporate office shell with carpet, glazed side wall, mullions, blinds and a restrained ceiling grid.",
+      "surfaces": {
+        "floor": {"color_rgb": [0.18, 0.17, 0.16], "roughness": 0.82, "metallic": 0.0},
+        "walls": {"color_rgb": [0.72, 0.72, 0.70], "roughness": 0.76, "metallic": 0.0},
+        "ceiling": {"color_rgb": [0.68, 0.68, 0.66], "roughness": 0.72, "metallic": 0.0}
+      },
+      "open_sides": ["front", "right"],
+      "elements": [
+        {"id": "left_glazing", "type": "glass_panel", "semantic_role": "partition", "translate_norm": [-0.498, 0.0, 0.48], "size_norm": [0.004, 1.0, 0.78], "min_size_m": [0.025, 0.0, 0.0], "display_color": [0.20, 0.24, 0.25], "display_opacity": 0.18, "material_roughness": 0.12},
+        {"id": "left_mullion", "type": "frame", "semantic_role": "mullion", "translate_norm": [-0.493, 0.0, 0.49], "size_norm": [0.008, 0.012, 0.82], "min_size_m": [0.04, 0.035, 0.0], "display_color": [0.08, 0.08, 0.075], "material_metallic": 0.65, "repeat": {"axis": "Y", "count": 15, "start_norm": -0.47, "end_norm": 0.47}},
+        {"id": "back_blind", "type": "frame", "semantic_role": "mullion", "translate_norm": [0.0, 0.493, 0.50], "size_norm": [0.010, 0.008, 0.76], "min_size_m": [0.035, 0.04, 0.0], "display_color": [0.23, 0.23, 0.21], "material_metallic": 0.25, "repeat": {"axis": "X", "count": 17, "start_norm": -0.46, "end_norm": 0.46}},
+        {"id": "ceiling_rail_x", "type": "beam", "semantic_role": "ceiling_rail", "translate_norm": [0.0, 0.0, 0.965], "size_norm": [1.0, 0.012, 0.025], "min_size_m": [0.0, 0.05, 0.06], "display_color": [0.30, 0.30, 0.29], "repeat": {"axis": "Y", "count": 5, "start_norm": -0.40, "end_norm": 0.40}},
+        {"id": "front_right_column", "type": "box", "semantic_role": "structural_column", "translate_norm": [0.47, -0.43, 0.50], "size_norm": [0.055, 0.055, 1.0], "min_size_m": [0.35, 0.35, 0.0], "display_color": [0.76, 0.76, 0.74], "material_roughness": 0.7}
+      ],
+      "lighting": {
+        "mode": "text_guided",
+        "environment": {"enabled": true, "intensity": 620.0, "color": [0.84, 0.90, 1.0]},
+        "fixtures": [
+          {"id": "office_panel_left", "type": "rect", "translate_norm": [-0.23, 0.05, 0.94], "look_at_norm": [-0.12, 0.05, 0.15], "width_ratio": 0.20, "height_ratio": 0.42, "intensity": 1900.0, "color": [1.0, 0.94, 0.84]},
+          {"id": "office_panel_right", "type": "rect", "translate_norm": [0.23, 0.05, 0.94], "look_at_norm": [0.12, 0.05, 0.15], "width_ratio": 0.20, "height_ratio": 0.42, "intensity": 1900.0, "color": [1.0, 0.94, 0.84]}
+        ]
+      }
+    },
+    "transit_concourse_v1": {
+      "domain": "public_transit",
+      "room_types": ["subway_station", "station_concourse", "ticket_hall"],
+      "description": "Bright transit concourse shell with terrazzo floor, structural columns, ceiling bands and wall cladding; no fare gates or platform equipment are baked in.",
+      "surfaces": {
+        "floor": {"color_rgb": [0.62, 0.64, 0.62], "roughness": 0.34, "metallic": 0.0},
+        "walls": {"color_rgb": [0.76, 0.76, 0.73], "roughness": 0.58, "metallic": 0.0},
+        "ceiling": {"color_rgb": [0.18, 0.18, 0.17], "roughness": 0.66, "metallic": 0.08}
+      },
+      "open_sides": ["front", "right"],
+      "elements": [
+        {"id": "column_left", "type": "box", "semantic_role": "structural_column", "translate_norm": [-0.42, 0.0, 0.48], "size_norm": [0.028, 0.018, 0.96], "min_size_m": [0.36, 0.36, 0.0], "display_color": [0.82, 0.82, 0.79], "repeat": {"axis": "Y", "count": 3, "start_norm": 0.0, "end_norm": 0.44}},
+        {"id": "column_right", "type": "box", "semantic_role": "structural_column", "translate_norm": [0.46, 0.0, 0.48], "size_norm": [0.028, 0.018, 0.96], "min_size_m": [0.30, 0.30, 0.0], "display_color": [0.82, 0.82, 0.79], "repeat": {"axis": "Y", "count": 3, "start_norm": 0.0, "end_norm": 0.44}},
+        {"id": "ceiling_cross_band", "type": "beam", "semantic_role": "soffit", "translate_norm": [0.0, 0.0, 0.91], "size_norm": [0.90, 0.028, 0.10], "min_size_m": [0.0, 0.35, 0.25], "display_color": [0.72, 0.71, 0.67], "repeat": {"axis": "Y", "count": 5, "start_norm": -0.42, "end_norm": 0.42}},
+        {"id": "ceiling_light_trough_left", "type": "frame", "semantic_role": "ceiling_rail", "translate_norm": [-0.18, 0.0, 0.945], "size_norm": [0.055, 0.92, 0.025], "min_size_m": [0.45, 0.0, 0.08], "display_color": [0.92, 0.90, 0.82], "emissive_color": [0.52, 0.48, 0.36]},
+        {"id": "ceiling_light_trough_right", "type": "frame", "semantic_role": "ceiling_rail", "translate_norm": [0.18, 0.0, 0.945], "size_norm": [0.055, 0.92, 0.025], "min_size_m": [0.45, 0.0, 0.08], "display_color": [0.92, 0.90, 0.82], "emissive_color": [0.52, 0.48, 0.36]},
+        {"id": "back_wall_band", "type": "box", "semantic_role": "wall_panel", "translate_norm": [0.0, 0.492, 0.58], "size_norm": [0.96, 0.008, 0.16], "min_size_m": [0.0, 0.08, 0.45], "display_color": [0.12, 0.11, 0.10], "material_roughness": 0.42}
+      ],
+      "lighting": {
+        "mode": "text_guided",
+        "environment": {"enabled": true, "intensity": 900.0, "color": [0.90, 0.94, 1.0]},
+        "fixtures": [
+          {"id": "concourse_strip_left", "type": "rect", "translate_norm": [-0.18, 0.0, 0.93], "look_at_norm": [-0.10, 0.08, 0.0], "width_ratio": 0.055, "height_ratio": 0.86, "intensity": 2400.0, "color": [1.0, 0.95, 0.84]},
+          {"id": "concourse_strip_right", "type": "rect", "translate_norm": [0.18, 0.0, 0.93], "look_at_norm": [0.10, 0.08, 0.0], "width_ratio": 0.055, "height_ratio": 0.86, "intensity": 2400.0, "color": [1.0, 0.95, 0.84]}
+        ]
+      }
+    },
+    "factory_daylight_v1": {
+      "domain": "industrial_assembly",
+      "room_types": ["factory", "assembly_hall", "industrial_lab"],
+      "description": "High-bay factory shell with epoxy floor, curtain-wall glazing, structural mullions and cool daylight; no process equipment is embedded.",
+      "surfaces": {
+        "floor": {"color_rgb": [0.30, 0.30, 0.27], "roughness": 0.48, "metallic": 0.0},
+        "walls": {"color_rgb": [0.78, 0.78, 0.75], "roughness": 0.68, "metallic": 0.0}
+      },
+      "open_sides": ["front", "right", "ceiling"],
+      "elements": [
+        {"id": "back_high_glass", "type": "glass_panel", "semantic_role": "partition", "translate_norm": [0.0, 0.494, 0.67], "size_norm": [0.96, 0.008, 0.62], "min_size_m": [0.0, 0.05, 0.0], "display_color": [0.25, 0.34, 0.38], "display_opacity": 0.22, "material_roughness": 0.10},
+        {"id": "back_mullion", "type": "frame", "semantic_role": "mullion", "translate_norm": [0.0, 0.488, 0.67], "size_norm": [0.009, 0.012, 0.64], "min_size_m": [0.06, 0.06, 0.0], "display_color": [0.16, 0.17, 0.17], "material_metallic": 0.65, "repeat": {"axis": "X", "count": 10, "start_norm": -0.46, "end_norm": 0.46}},
+        {"id": "back_transom", "type": "frame", "semantic_role": "mullion", "translate_norm": [0.0, 0.488, 0.0], "size_norm": [0.96, 0.012, 0.018], "min_size_m": [0.0, 0.06, 0.07], "display_color": [0.16, 0.17, 0.17], "material_metallic": 0.65, "repeat": {"axis": "Z", "count": 3, "start_norm": 0.42, "end_norm": 0.86}},
+        {"id": "left_high_glass", "type": "glass_panel", "semantic_role": "partition", "translate_norm": [-0.494, 0.0, 0.67], "size_norm": [0.008, 0.96, 0.62], "min_size_m": [0.05, 0.0, 0.0], "display_color": [0.25, 0.34, 0.38], "display_opacity": 0.22, "material_roughness": 0.10},
+        {"id": "left_mullion", "type": "frame", "semantic_role": "mullion", "translate_norm": [-0.488, 0.0, 0.67], "size_norm": [0.012, 0.009, 0.64], "min_size_m": [0.06, 0.06, 0.0], "display_color": [0.16, 0.17, 0.17], "material_metallic": 0.65, "repeat": {"axis": "Y", "count": 8, "start_norm": -0.45, "end_norm": 0.45}},
+        {"id": "high_bay_column", "type": "box", "semantic_role": "structural_column", "translate_norm": [0.0, 0.0, 0.50], "size_norm": [0.028, 0.028, 1.0], "min_size_m": [0.36, 0.36, 0.0], "display_color": [0.82, 0.82, 0.78], "repeat_grid": {"x_norm": [-0.44, 0.44], "y_norm": [0.40]}}
+      ],
+      "lighting": {
+        "mode": "text_guided",
+        "environment": {"enabled": true, "intensity": 1500.0, "color": [0.80, 0.89, 1.0]},
+        "fixtures": [
+          {"id": "factory_fill", "type": "rect", "translate_norm": [0.0, -0.05, 0.93], "look_at_norm": [0.0, 0.05, 0.0], "width_ratio": 0.62, "height_ratio": 0.55, "intensity": 2000.0, "color": [1.0, 0.94, 0.84]}
+        ]
+      }
+    }
+  }
+}

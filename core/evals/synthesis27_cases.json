@@ -1,0 +1,41 @@
+{
+  "schema_version": "isaac-scene-benchmark-catalog/v1",
+  "name": "synthesis-27-reference-reconstruction",
+  "source_policy": "Use reference images and semantic metadata only. Do not import source scene geometry into generated outputs.",
+  "scenes": [
+    {"id": "01cb3cdf-df8b-40a8-98d0-4bcc5df8ff69", "slug": "consulting_room", "name": "consulting room", "category": "Consulting room"},
+    {"id": "74ba43e9-8ad5-47b8-9fd7-b2e893b2b36d", "slug": "demo", "name": "Demo", "category": "dev test"},
+    {"id": "dfc6dfad-447d-4542-96e5-008be5d2779d", "slug": "assembly_line_workshop", "name": "Assembly line workshop", "category": "Factory"},
+    {"id": "22374b69-ef84-4412-840e-14979cf6a843", "slug": "auto_workshop", "name": "auto workshop", "category": "Factory"},
+    {"id": "1af80729-aa2b-462f-98a3-00b743b72cd3", "slug": "car_factory", "name": "Car factory", "category": "Factory"},
+    {"id": "2b1f7042-c2be-4ab3-8a62-4f62206a3965", "slug": "chemical_workshop", "name": "Chemical workshop", "category": "Factory"},
+    {"id": "1cb389c2-8e74-4438-bfba-ce542d1d0b44", "slug": "factory001", "name": "factory001", "category": "Factory"},
+    {"id": "18f6ca61-54d9-4ae3-ae05-e98a2e288b8d", "slug": "logistics_warehousing", "name": "logistics warehousing", "category": "Factory"},
+    {"id": "a382b82f-6734-47e5-b496-66300df4d878", "slug": "laboratory", "name": "laboratory", "category": "Laboratory"},
+    {"id": "91e62032-9077-4b5e-890b-d6bc6b6aadaf", "slug": "laboratory001", "name": "laboratory001", "category": "Laboratory"},
+    {
+      "id": "6011b7ff-f9d8-4bfe-bb5e-9061d8a495bf",
+      "slug": "meeting_room_02",
+      "name": "meeting room_02",
+      "category": "Meeting Room",
+      "rendered_image": "agent_output/render_composition_v4_800x472.png",
+      "scene_spec": "agent_output/scene_spec_composition_v4.json"
+    },
+    {"id": "a56260a8-f221-4ad4-8392-093edfc707db", "slug": "office", "name": "office", "category": "Office"},
+    {"id": "c8eb8118-5387-421e-adae-e9ce144a05f5", "slug": "office001", "name": "office001", "category": "Office"},
+    {"id": "5ef90dda-1e9a-4154-a76f-3297b6d4eac2", "slug": "operating_room001", "name": "operating_room001", "category": "Operating room"},
+    {"id": "5283281e-da86-41ea-a164-9ce8b6ac84e8", "slug": "operating_room002", "name": "operating_room002", "category": "Operating room"},
+    {"id": "d52b046e-a35e-4a45-a014-63560b89256f", "slug": "children_room", "name": "children room", "category": "Residence"},
+    {"id": "b6a4ec07-a861-45e8-8281-a81da7658c0d", "slug": "dining_room", "name": "dining room", "category": "Residence"},
+    {"id": "318e4360-6414-4008-94b6-7e6819eae23a", "slug": "kitchen", "name": "kitchen", "category": "Residence"},
+    {"id": "5c06267d-62a9-4360-88e9-9df1384d5796", "slug": "kitchen_with_parlor", "name": "kitchen_with_parlor", "category": "Residence"},
+    {"id": "6ffb87b9-e261-4d13-8496-ffa01360b30e", "slug": "large_living_room", "name": "large living room", "category": "Residence"},
+    {"id": "2d4b24b3-2fb9-4dba-b7e0-553a9cc09444", "slug": "living_room", "name": "living room", "category": "Residence"},
+    {"id": "ba229c0a-f9e2-4de9-babd-1d8eb33ef607", "slug": "two_bedroom_apartment", "name": "two bedroom apartment", "category": "Residence"},
+    {"id": "41542eb4-83ad-4546-a2d3-e515084a27b7", "slug": "kindergarten", "name": "kindergarten", "category": "School"},
+    {"id": "ebf0c426-10be-49b5-afc2-092cc563a20a", "slug": "store001", "name": "store001", "category": "Store"},
+    {"id": "d9b39158-a713-4d7c-9546-7d3467f9eff3", "slug": "subway_station001", "name": "subway station001", "category": "Subway station"},
+    {"id": "238fff91-d3a8-4484-a97e-fe0fc0f314ec", "slug": "subway_station002", "name": "subway station002", "category": "Subway station"},
+    {"id": "017808e9-9571-41e4-8143-f5593e0b9eed", "slug": "ward001", "name": "ward001", "category": "Ward"}
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "isaac-scene-domain/v1",
+  "name": "generic_scene",
+  "description": "Single-room fallback for office, meeting, school, clinic, store, public indoor, and other scenes without a specialized pack.",
+  "triggers": {
+    "en": ["scene", "environment", "office", "meeting room", "school", "clinic", "hospital", "store", "public indoor"],
+    "zh": ["场景", "环境", "办公室", "会议室", "学校", "教室", "诊室", "病房", "商店", "公共室内"]
+  },
+  "roles": ["room_shell", "anchor", "support", "seat", "storage", "equipment", "prop", "robot", "light", "camera"],
+  "search_libraries": ["curated_common", "geniesim", "grscenes_scenes", "industrial", "isaac_official"],
+  "validation_profile": "generic_static",
+  "layout_profile": {
+    "default_zone": "general_interior",
+    "default_zones": [
+      {"id": "work_rows", "bounds_norm": [0.18, 0.20, 0.76, 0.70], "purpose": "primary work surfaces in readable rows", "distribution": "grid"},
+      {"id": "seat_rows", "bounds_norm": [0.26, 0.12, 0.88, 0.78], "purpose": "seating adjacent to the work area", "distribution": "grid"},
+      {"id": "storage_wall", "bounds_norm": [0.10, 0.76, 0.90, 0.92], "purpose": "storage along the rear boundary", "distribution": "grid"},
+      {"id": "decor_perimeter", "bounds_norm": [0.08, 0.08, 0.92, 0.92], "purpose": "decor at room edges and corners", "distribution": "perimeter"},
+      {"id": "general_interior", "bounds_norm": [0.15, 0.15, 0.85, 0.85], "purpose": "fallback usable interior", "distribution": "grid"}
+    ],
+    "rules": [
+      {"id": "work_surface_rows", "match": {"semantic_terms": ["workbench", "desk", "workstation", "meeting table"]}, "zone": "work_rows", "distribution": "grid", "yaw_sequence_deg": [0, 180], "yaw_deltas_deg": [0]},
+      {"id": "seat_rows", "match": {"semantic_terms": ["office chair", "task chair", "meeting chair"]}, "zone": "seat_rows", "distribution": "grid", "yaw_sequence_deg": [180, 0]},
+      {"id": "storage_wall", "match": {"semantic_terms": ["bookcase", "bookshelf", "storage cabinet"]}, "zone": "storage_wall", "distribution": "grid", "preferred_yaw_deg": 0},
+      {"id": "decor_perimeter", "match": {"semantic_terms": ["potted plant", "indoor plant"]}, "zone": "decor_perimeter", "distribution": "perimeter", "preferred_yaw_deg": 0}
+    ],
+    "functional_groups": [
+      {
+        "id": "office_workstation",
+        "anchor_match": {"layout_roles": ["support_furniture"], "semantic_terms": ["workbench", "desk", "workstation"]},
+        "members": [
+          {
+            "match": {"layout_roles": ["ground_object"], "semantic_terms": ["office chair", "task chair"]},
+            "per_anchor": 2,
+            "offsets_m": [[-0.45, -1.4], [0.45, -1.4]],
+            "yaw_offsets_deg": [180, 180],
+            "yaw_deltas_deg": [0],
+            "facing_policy": "toward_anchor",
+            "obstacle_clearance_m": 0.1
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "schema_version": "isaac-scene-brief/v1",
+  "inputs": {
+    "mode": "hybrid",
+    "text": "Create a modern meeting room matching the reference.",
+    "reference_images": [
+      {
+        "path": "reference.jpg",
+        "width_px": 400,
+        "height_px": 300,
+        "view_id": "main"
+      }
+    ]
+  },
+  "domain": "generic_scene",
+  "quality_policy": "reference_match",
+  "room": {
+    "type": "meeting_room",
+    "size_m": [8.0, 9.0, 3.2],
+    "size_confidence": "medium",
+    "style_tags": ["modern", "corporate"],
+    "floor": {"material_tags": ["gray tile"], "color_rgb": [0.52, 0.5, 0.47]},
+    "walls": {"material_tags": ["paint"], "color_rgb": [0.78, 0.78, 0.76]},
+    "open_sides": ["front"],
+    "openings": []
+  },
+  "camera": {
+    "projection": "perspective",
+    "position_m": [1.6, -7.02, 2.8],
+    "look_at_m": [0.1, 0.0, 1.15],
+    "up_axis": "+Z",
+    "focal_length_mm": 28.0,
+    "confidence": "medium",
+    "evidence": "single-view vanishing lines and visible wall boundaries"
+  },
+  "objects": [
+    {
+      "id": "conference_table",
+      "role": "table",
+      "semantic_class": "furniture/surface/meeting_table",
+      "semantic_name": "long light-wood conference table",
+      "criticality": "anchor",
+      "confidence": "high",
+      "evidence": "dominant central object",
+      "size_m": [2.7, 5.0, 0.75],
+      "screen_bbox_norm": [0.27, 0.43, 0.47, 0.46],
+      "facing_target": "wall_display",
+      "support_target": "floor",
+      "asset_binding": {
+        "logical_id": "fixture:conference_table",
+        "path": "/assets/conference_table.usd",
+        "front_axis": "+X",
+        "orientation_confidence": "high",
+        "orientation_source": "four-view preview",
+        "reference_match_evidence": {
+          "status": "pass",
+          "preview_index_path": "/previews/conference_table/preview_index.json",
+          "visual_score": 0.81,
+          "candidate_pool_count": 24,
+          "top_two_margin": 0.08
+        },
+        "scale": [1.0, 1.0, 1.0]
+      },
+      "instances": [
+        {"id": "conference_table", "translate_m": [0.3, 0.0, 0.376], "rotate_deg": [0.0, 0.0, 90.0]}
+      ]
+    },
+    {
+      "id": "side_chair",
+      "role": "chair",
+      "semantic_class": "furniture/seating/conference_chair",
+      "semantic_name": "black cantilever conference chair",
+      "count": 2,
+      "criticality": "anchor",
+      "confidence": "high",
+      "evidence": "repeated chairs along both long table edges",
+      "size_m": [0.68, 0.71, 1.11],
+      "facing_target": "conference_table",
+      "support_target": "floor",
+      "identical_instances": true,
+      "asset_binding": {
+        "logical_id": "fixture:cantilever_chair",
+        "path": "/assets/cantilever_chair.usd",
+        "front_axis": "+X",
+        "orientation_confidence": "high",
+        "orientation_source": "four-view preview",
+        "reference_match_evidence": {
+          "status": "pass",
+          "preview_index_path": "/previews/cantilever_chair/preview_index.json",
+          "visual_score": 0.84,
+          "candidate_pool_count": 31,
+          "top_two_margin": 0.06
+        },
+        "scale": [1.0, 1.0, 1.0]
+      },
+      "instances": [
+        {"id": "left_chair", "translate_m": [-1.05, 0.0, 0.555], "rotate_deg": [0.0, 0.0, 0.0]},
+        {"id": "right_chair", "translate_m": [1.65, 0.0, 0.555], "rotate_deg": [0.0, 0.0, 180.0]}
+      ]
+    },
+    {
+      "id": "wall_display",
+      "role": "display",
+      "semantic_class": "electronics/display",
+      "semantic_name": "large black wall display",
+      "criticality": "anchor",
+      "confidence": "high",
+      "evidence": "centered on back wall",
+      "size_m": [1.8, 0.1, 1.0],
+      "wall_affinity": "back",
+      "asset_binding": {
+        "logical_id": "fixture:wall_display",
+        "path": "/assets/wall_display.usd",
+        "front_axis": "+X",
+        "orientation_confidence": "high",
+        "orientation_source": "four-view preview",
+        "reference_match_evidence": {
+          "status": "pass",
+          "preview_index_path": "/previews/wall_display/preview_index.json",
+          "visual_score": 0.88,
+          "candidate_pool_count": 20,
+          "top_two_margin": 0.11
+        },
+        "scale": [1.0, 1.0, 1.0]
+      },
+      "instances": [
+        {"id": "wall_display", "translate_m": [0.0, 4.3, 1.7], "rotate_deg": [0.0, 0.0, -90.0]}
+      ]
+    }
+  ],
+  "zones": [
+    {"id": "meeting_core", "bounds_norm": [0.18, 0.08, 0.64, 0.8], "purpose": "table and seating"}
+  ],
+  "circulation": {
+    "minimum_path_width_m": 0.8,
+    "keep_clear_zones": []
+  },
+  "assumptions": [],
+  "unresolved_questions": []
+}

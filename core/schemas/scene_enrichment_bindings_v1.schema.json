@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "isaac-scene-enrichment-bindings/v1",
+  "title": "Pose-free verified bindings for a scene enrichment plan",
+  "type": "object",
+  "required": ["schema_version", "profile_id", "decisions"],
+  "properties": {
+    "schema_version": {"const": "isaac-scene-enrichment-bindings/v1"},
+    "profile_id": {"type": "string", "minLength": 1},
+    "selected_shell_preset": {"type": ["string", "null"]},
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["request_id", "status"],
+        "properties": {
+          "request_id": {"type": "string", "minLength": 1},
+          "status": {"enum": ["bound", "partial", "gap"]},
+          "gap_code": {"type": "string"},
+          "reason": {"type": "string"},
+          "instances": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "size_m", "asset_binding"],
+              "properties": {
+                "id": {"type": "string", "minLength": 1},
+                "size_m": {
+                  "type": "array",
+                  "minItems": 3,
+                  "maxItems": 3,
+                  "items": {"type": "number", "exclusiveMinimum": 0}
+                },
+                "support_target": {"type": "string"},
+                "placement_policy": {"enum": ["solid", "floor_underlay", "non_blocking"]},
+                "mount_target": {},
+                "mount_anchor": {},
+                "asset_binding": {
+                  "type": "object",
+                  "required": ["logical_id", "path"],
+                  "properties": {
+                    "logical_id": {"type": "string", "minLength": 1},
+                    "path": {"type": "string", "minLength": 1}
+                  }
+                }
+              },
+              "not": {
+                "anyOf": [
+                  {"required": ["xform_matrix"]},
+                  {"required": ["source_world_matrix"]},
+                  {"required": ["regression_alignment"]}
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,493 @@
+{
+  "schema_version": "isaac-scene-enrichment-profile-library/v1",
+  "density_levels": {
+    "sparse": {"label": "clean sparse", "prop_scale": 0.55},
+    "normal": {"label": "complete natural", "prop_scale": 1.0},
+    "rich": {"label": "rich lived-in", "prop_scale": 1.45}
+  },
+  "defaults": {
+    "architecture": {
+      "minimum_feature_roles": ["floor", "walls", "ceiling", "door_or_opening", "window", "frames", "baseboards", "visible_lights"],
+      "forbid_visible_furniture_primitives": true
+    },
+    "circulation": {"minimum_path_width_m": 0.75, "preserve_openings": true},
+    "camera": {"candidate_views": ["open_front_left", "open_front_right", "human_eye", "top_down"], "minimum_anchor_coverage": 0.9},
+    "render": {"perspective_required": true, "top_down_required": true, "maximum_lighting_iterations": 2},
+    "generation": {
+      "objective": "functional_coverage_not_object_count",
+      "phase_order": ["anchors", "functional", "detail"],
+      "advance_requires_content_accept": true,
+      "overflow_action_order": ["remove_optional_detail", "reduce_repetition", "record_gap"]
+    },
+    "asset_selection": {
+      "cross_category_fallback": "forbidden",
+      "uncertain_identity": "asset_gap",
+      "visual_confirmation": "required_for_non_exact_or_generic_match"
+    }
+  },
+  "profiles": {
+    "home_scene/living_room": {
+      "recommended_shell_preset": "living_warm_v2",
+      "style_profile": {
+        "name": "warm_modern",
+        "palette": ["warm wood", "cream", "dark brown", "muted green"],
+        "materials": ["wood", "fabric", "matte painted wall", "small metal accents"],
+        "lighting_mood": "warm practical lights balanced with cool window daylight"
+      },
+      "layout_rules": [
+        {
+          "id": "living_wall_storage_flush",
+          "priority": 100,
+          "match": {
+            "semantic_terms": [
+              "bookcase",
+              "bookshelf"
+            ]
+          },
+          "zone": "storage_zone",
+          "distribution": "grid",
+          "orientation_priority": "wall_flush",
+          "wall_affinity": "back",
+          "wall_clearance_m": 0.12,
+          "yaw_deltas_deg": [
+            0.0
+          ]
+        }
+      ],
+      "suggestions": [
+        {
+          "id": "side_table",
+          "layer": "secondary_furniture",
+          "role": "side_table",
+          "query": "modern living room side table",
+          "canonical_class": "furniture/surface/side_table",
+          "counts": {"sparse": 0, "normal": 1, "rich": 2},
+          "criticality": "medium",
+          "support_target": "floor",
+          "zone": "seating_zone",
+          "dedupe_terms": ["side_table", "end_table"]
+        },
+        {
+          "id": "area_rug",
+          "layer": "soft_furnishing",
+          "role": "rug",
+          "query": "warm modern living room area rug",
+          "canonical_class": "decor/rug",
+          "counts": {"sparse": 0, "normal": 1, "rich": 1},
+          "criticality": "medium",
+          "support_target": "floor",
+          "zone": "center",
+          "placement_policy": "floor_underlay",
+          "distribution": "center",
+          "dedupe_terms": ["rug", "carpet"]
+        },
+        {
+          "id": "wall_art",
+          "layer": "wall_dressing",
+          "role": "wall_art",
+          "query": "warm modern framed wall art",
+          "canonical_class": "decor/wall_art",
+          "counts": {"sparse": 0, "normal": 1, "rich": 2},
+          "criticality": "detail",
+          "mount_target": "wall",
+          "zone": "media_wall",
+          "dedupe_terms": ["wall_art", "painting", "picture"]
+        },
+        {
+          "id": "curtain",
+          "layer": "soft_furnishing",
+          "role": "curtain",
+          "query": "warm fabric living room curtain",
+          "canonical_class": "decor/window/curtain",
+          "counts": {"sparse": 0, "normal": 1, "rich": 1},
+          "criticality": "detail",
+          "mount_target": "wall",
+          "zone": "window_zone",
+          "dedupe_terms": ["curtain", "drape"]
+        },
+        {
+          "id": "coffee_table_book",
+          "layer": "supported_prop",
+          "role": "book",
+          "query": "hardcover book",
+          "canonical_class": "household/book",
+          "counts": {"sparse": 1, "normal": 2, "rich": 3},
+          "criticality": "detail",
+          "support_target_role": "coffee_table",
+          "zone": "seating_zone",
+          "dedupe_terms": []
+        },
+        {
+          "id": "coffee_table_remote",
+          "layer": "supported_prop",
+          "role": "remote_control",
+          "query": "television remote control",
+          "canonical_class": "electronics/accessory/remote_control",
+          "counts": {"sparse": 0, "normal": 1, "rich": 1},
+          "criticality": "detail",
+          "support_target_role": "coffee_table",
+          "zone": "seating_zone",
+          "dedupe_terms": ["remote_control", "remote"]
+        },
+        {
+          "id": "coffee_table_vase",
+          "layer": "supported_prop",
+          "role": "vase",
+          "query": "small ceramic decorative vase",
+          "canonical_class": "decor/vase",
+          "counts": {"sparse": 0, "normal": 1, "rich": 1},
+          "criticality": "detail",
+          "support_target_role": "coffee_table",
+          "zone": "seating_zone",
+          "dedupe_terms": ["vase"]
+        },
+        {
+          "id": "bookshelf_books",
+          "layer": "supported_prop",
+          "role": "book",
+          "query": "books for bookshelf",
+          "canonical_class": "household/book",
+          "counts": {"sparse": 2, "normal": 4, "rich": 6},
+          "criticality": "detail",
+          "support_target_role": "bookcase",
+          "zone": "storage_zone",
+          "dedupe_terms": []
+        },
+        {
+          "id": "side_table_decor",
+          "layer": "supported_prop",
+          "role": "side_table_decor",
+          "query": "small warm living room side table decor",
+          "canonical_class": "decor/ornament",
+          "counts": {"sparse": 0, "normal": 1, "rich": 2},
+          "criticality": "detail",
+          "support_target_role": "side_table",
+          "zone": "seating_zone",
+          "dedupe_terms": []
+        }
+      ],
+      "functional_groups": [
+        {
+          "id": "living_side_tables",
+          "anchor_match": {
+            "semantic_terms": [
+              "sofa"
+            ]
+          },
+          "members": [
+            {
+              "match": {
+                "semantic_terms": [
+                  "side_table"
+                ]
+              },
+              "per_anchor": 2,
+              "offsets_m": [
+                [0.0, -1.55],
+                [0.0, 1.55]
+              ],
+              "yaw_offsets_deg": [0.0, 0.0],
+              "yaw_deltas_deg": [0.0, 90.0, -90.0],
+              "obstacle_clearance_m": 0.08
+            }
+          ]
+        }
+      ],
+      "surface_prop_budgets": [
+        {"support_role": "coffee_table", "minimum": {"sparse": 1, "normal": 2, "rich": 3}, "maximum": {"sparse": 2, "normal": 4, "rich": 5}},
+        {"support_role": "tv_stand", "minimum": {"sparse": 0, "normal": 1, "rich": 2}, "maximum": {"sparse": 1, "normal": 3, "rich": 4}},
+        {"support_role": "bookcase", "minimum": {"sparse": 2, "normal": 4, "rich": 6}, "maximum": {"sparse": 3, "normal": 7, "rich": 10}}
+      ],
+      "zones": [
+        {"id": "seating_zone", "bounds_norm": [0.08, 0.18, 0.58, 0.74], "purpose": "sofa, coffee table, side tables and supported props", "distribution": "grid"},
+        {"id": "media_wall", "bounds_norm": [0.66, 0.20, 0.94, 0.70], "purpose": "TV, media cabinet and restrained wall dressing", "distribution": "center"},
+        {"id": "storage_zone", "bounds_norm": [0.22, 0.72, 0.66, 0.94], "purpose": "bookcase and shelf contents", "distribution": "grid"},
+        {"id": "window_zone", "bounds_norm": [0.02, 0.18, 0.18, 0.76], "purpose": "window treatment without blocking daylight", "distribution": "perimeter"},
+        {"id": "entry_clearance", "bounds_norm": [0.70, 0.70, 1.0, 1.0], "purpose": "unobstructed route from the entry to seating", "distribution": "keep_clear"}
+      ],
+      "validation_targets": [
+        "required_inventory_preserved",
+        "architecture_feature_coverage",
+        "support_budget_satisfied",
+        "mesh_support_contact",
+        "no_overlap",
+        "facing",
+        "circulation",
+        "style_coherence",
+        "camera_anchor_coverage",
+        "render_feedback"
+      ]
+    },
+    "generic_scene/office": {
+      "recommended_shell_preset": "office_glazed_v1",
+      "style_profile": {
+        "name": "bright_modern_office",
+        "palette": ["light oak", "charcoal", "off white", "muted green"],
+        "materials": ["carpet", "painted metal", "wood veneer", "glass"],
+        "lighting_mood": "neutral ceiling light with soft glazed-wall daylight"
+      },
+      "layout_rules": [
+        {
+          "id": "office_wall_storage_flush", "priority": 100,
+          "match": {"semantic_terms": ["bookcase", "bookshelf"]},
+          "zone": "storage_wall", "distribution": "grid",
+          "orientation_priority": "wall_flush", "wall_affinity": "back",
+          "wall_clearance_m": 0.10, "yaw_deltas_deg": [0.0]
+        }
+      ],
+      "suggestions": [
+        {"id": "office_keyboard", "layer": "supported_prop", "role": "keyboard", "query": "slim black computer keyboard", "canonical_class": "electronics/computer/keyboard", "counts": {"sparse": 1, "normal": 2, "rich": 2}, "criticality": "medium", "support_target_role": "desk", "zone": "work_rows", "dedupe_terms": ["keyboard"]},
+        {"id": "office_mouse", "layer": "supported_prop", "role": "mouse", "query": "black computer mouse", "canonical_class": "electronics/computer/mouse", "counts": {"sparse": 1, "normal": 2, "rich": 2}, "criticality": "detail", "support_target_role": "desk", "zone": "work_rows", "dedupe_terms": ["mouse"]},
+        {"id": "office_desk_lamp", "layer": "supported_prop", "role": "desk_lamp", "query": "modern office desk lamp", "canonical_class": "lighting/desk_lamp", "counts": {"sparse": 0, "normal": 1, "rich": 2}, "criticality": "detail", "support_target_role": "desk", "zone": "work_rows", "dedupe_terms": ["desk_lamp"]},
+        {"id": "office_notebook", "layer": "supported_prop", "role": "notebook", "query": "closed office notebook", "canonical_class": "office/notebook", "counts": {"sparse": 1, "normal": 2, "rich": 3}, "criticality": "detail", "support_target_role": "desk", "zone": "work_rows", "dedupe_terms": []},
+        {"id": "office_document", "layer": "supported_prop", "role": "document", "query": "office document sheet", "canonical_class": "office/document", "counts": {"sparse": 0, "normal": 1, "rich": 2}, "criticality": "detail", "support_target_role": "desk", "zone": "work_rows", "dedupe_terms": ["document"]},
+        {"id": "office_waste_bin", "layer": "secondary_furniture", "role": "waste_bin", "query": "small office waste bin", "canonical_class": "office/waste_bin", "counts": {"sparse": 0, "normal": 1, "rich": 1}, "criticality": "detail", "support_target": "floor", "zone": "work_rows", "dedupe_terms": ["waste_bin", "trash_bin"]},
+        {"id": "office_wall_clock", "layer": "wall_dressing", "role": "wall_clock", "query": "minimal office wall clock", "canonical_class": "decor/wall_clock", "counts": {"sparse": 0, "normal": 0, "rich": 1}, "criticality": "detail", "mount_target": "wall", "zone": "storage_wall", "dedupe_terms": ["wall_clock"]}
+      ],
+      "surface_prop_budgets": [
+        {"support_role": "desk", "minimum": {"sparse": 1, "normal": 2, "rich": 3}, "maximum": {"sparse": 2, "normal": 4, "rich": 5}}
+      ],
+      "zones": [
+        {"id": "work_rows", "bounds_norm": [0.20, 0.20, 0.72, 0.72], "purpose": "paired workstations and desk props", "distribution": "grid"},
+        {"id": "storage_wall", "bounds_norm": [0.12, 0.77, 0.52, 0.92], "purpose": "flush wall storage", "distribution": "grid"}
+      ],
+      "validation_targets": ["required_inventory_preserved", "mesh_support_contact", "no_overlap", "facing", "circulation", "style_coherence", "camera_anchor_coverage", "render_feedback"]
+    },
+    "generic_scene/meeting_room": {
+      "recommended_shell_preset": "office_glazed_v1",
+      "style_profile": {
+        "name": "active_modern_meeting_room",
+        "palette": ["dark wood", "charcoal", "warm white", "muted green"],
+        "materials": ["carpet", "wood veneer", "mesh upholstery", "glass"],
+        "lighting_mood": "bright neutral meeting light with soft glazed-wall daylight"
+      },
+      "suggestions": [
+        {"id": "meeting_notebook", "layer": "supported_prop", "role": "notebook", "query": "open meeting notebook", "canonical_class": "office/notebook", "counts": {"sparse": 2, "normal": 4, "rich": 6}, "criticality": "detail", "support_target_role": "meeting_table", "zone": "tabletop", "dedupe_terms": []},
+        {"id": "meeting_document", "layer": "supported_prop", "role": "document", "query": "meeting agenda document", "canonical_class": "office/document", "counts": {"sparse": 1, "normal": 2, "rich": 4}, "criticality": "detail", "support_target_role": "meeting_table", "zone": "tabletop", "dedupe_terms": []},
+        {"id": "meeting_drinkware", "layer": "supported_prop", "role": "mug", "query": "simple ceramic meeting mug", "canonical_class": "kitchenware/cookware", "counts": {"sparse": 0, "normal": 1, "rich": 2}, "criticality": "detail", "support_target_role": "meeting_table", "zone": "tabletop", "dedupe_terms": ["mug", "cup"]},
+        {"id": "meeting_wall_clock", "layer": "wall_dressing", "role": "wall_clock", "query": "minimal office wall clock", "canonical_class": "decor/wall_clock", "counts": {"sparse": 0, "normal": 0, "rich": 1}, "criticality": "detail", "mount_target": "wall", "zone": "presentation_wall", "dedupe_terms": ["wall_clock"]}
+      ],
+      "surface_prop_budgets": [
+        {"support_role": "meeting_table", "minimum": {"sparse": 2, "normal": 4, "rich": 6}, "maximum": {"sparse": 4, "normal": 8, "rich": 12}}
+      ],
+      "zones": [
+        {"id": "tabletop", "bounds_norm": [0.28, 0.24, 0.72, 0.72], "purpose": "meeting materials and shared display", "distribution": "functional_group"},
+        {"id": "presentation_wall", "bounds_norm": [0.18, 0.78, 0.82, 0.96], "purpose": "presentation display and restrained wall dressing", "distribution": "center"},
+        {"id": "entry_clearance", "bounds_norm": [0.72, 0.02, 1.0, 0.30], "purpose": "unobstructed room entry", "distribution": "keep_clear"}
+      ],
+      "validation_targets": ["required_inventory_preserved", "support_budget_satisfied", "mesh_support_contact", "no_overlap", "facing", "circulation", "style_coherence", "camera_anchor_coverage", "render_feedback"]
+    },
+    "industrial_assembly/auto_workshop": {
+      "recommended_shell_preset": "factory_daylight_v1",
+      "style_profile": {
+        "name": "active_automotive_service_cell",
+        "palette": ["industrial gray", "safety yellow", "machine white", "signal red", "rack blue"],
+        "materials": ["sealed concrete", "painted steel", "rubber", "corrugated cardboard"],
+        "lighting_mood": "bright high-bay service lighting with readable machine faces"
+      },
+      "suggestions": [
+        {"id": "workshop_rack_carton", "layer": "supported_prop", "role": "parts_carton", "query": "small automotive parts carton", "canonical_class": "logistics/container", "counts": {"sparse": 2, "normal": 4, "rich": 6}, "criticality": "detail", "support_target_role": "parts_rack", "zone": "parts_storage", "dedupe_terms": []},
+        {"id": "workshop_fire_extinguisher", "layer": "secondary_furniture", "role": "fire_extinguisher", "query": "workshop fire extinguisher", "canonical_class": "safety/equipment/fire_extinguisher", "counts": {"sparse": 0, "normal": 1, "rich": 2}, "criticality": "medium", "support_target": "floor", "zone": "safety_perimeter", "dedupe_terms": ["fire_extinguisher"]},
+        {"id": "workshop_safety_cone", "layer": "decor", "role": "safety_cone", "query": "automotive workshop traffic cone", "canonical_class": "safety/traffic_cone", "counts": {"sparse": 0, "normal": 1, "rich": 2}, "criticality": "detail", "support_target": "floor", "zone": "safety_perimeter", "dedupe_terms": ["safety_cone"]}
+      ],
+      "surface_prop_budgets": [
+        {"support_role": "parts_rack", "minimum": {"sparse": 2, "normal": 4, "rich": 6}, "maximum": {"sparse": 4, "normal": 7, "rich": 10}},
+        {"support_role": "service_workbench", "minimum": {"sparse": 2, "normal": 3, "rich": 5}, "maximum": {"sparse": 4, "normal": 6, "rich": 8}}
+      ],
+      "zones": [
+        {"id": "service_bays", "bounds_norm": [0.20, 0.16, 0.86, 0.66], "purpose": "machine and material-cart service cells", "distribution": "grid"},
+        {"id": "parts_storage", "bounds_norm": [0.02, 0.64, 0.34, 0.96], "purpose": "parts rack and shelf cartons", "distribution": "grid"},
+        {"id": "safety_perimeter", "bounds_norm": [0.04, 0.08, 0.96, 0.94], "purpose": "safety equipment outside service circulation", "distribution": "perimeter"},
+        {"id": "service_aisle", "bounds_norm": [0.37, 0.02, 0.63, 0.92], "purpose": "unobstructed service aisle", "distribution": "keep_clear"}
+      ],
+      "validation_targets": ["required_inventory_preserved", "support_budget_satisfied", "mesh_support_contact", "no_overlap", "facing", "service_aisle", "camera_anchor_coverage", "render_feedback"]
+    },
+    "industrial_assembly/compact_factory_cell": {
+      "recommended_shell_preset": "factory_daylight_v1",
+      "style_profile": {
+        "name": "compact_inspection_and_machine_cell",
+        "palette": ["industrial gray", "machine white", "safety yellow", "signal red", "rack blue"],
+        "materials": ["sealed concrete", "painted steel", "rubber", "polycarbonate guarding"],
+        "lighting_mood": "bright high-bay illumination with readable operator and inspection faces"
+      },
+      "layout_rules": [
+        {"id": "factory_line_axis", "priority": 100, "match": {"semantic_terms": ["assembly_line", "conveyor"]}, "zone": "process_line", "distribution": "center", "orientation_priority": "align_flow_axis"},
+        {"id": "factory_operator_faces", "priority": 95, "match": {"semantic_terms": ["cnc", "console", "inspection", "workbench"]}, "zone": "operator_cells", "distribution": "grid", "orientation_priority": "face_process_line"},
+        {"id": "factory_robot_clearance", "priority": 100, "match": {"semantic_terms": ["robot", "manipulator"]}, "zone": "robot_cell", "distribution": "center", "orientation_priority": "face_process_line"}
+      ],
+      "suggestions": [
+        {"id": "factory_fire_extinguisher", "layer": "secondary_furniture", "role": "fire_extinguisher", "query": "industrial fire extinguisher", "canonical_class": "safety/equipment/fire_extinguisher", "counts": {"sparse": 0, "normal": 1, "rich": 2}, "criticality": "medium", "support_target": "floor", "zone": "safety_perimeter", "dedupe_terms": ["fire_extinguisher"]},
+        {"id": "factory_safety_cone", "layer": "decor", "role": "safety_cone", "query": "industrial safety traffic cone", "canonical_class": "safety/traffic_cone", "counts": {"sparse": 0, "normal": 2, "rich": 4}, "criticality": "detail", "support_target": "floor", "zone": "safety_perimeter", "dedupe_terms": []}
+      ],
+      "zones": [
+        {"id": "process_line", "bounds_norm": [0.15, 0.36, 0.85, 0.62], "purpose": "primary material process axis", "distribution": "center"},
+        {"id": "operator_cells", "bounds_norm": [0.08, 0.64, 0.92, 0.92], "purpose": "operator-facing machines and inspection stations", "distribution": "grid"},
+        {"id": "robot_cell", "bounds_norm": [0.62, 0.08, 0.90, 0.34], "purpose": "guarded manipulation cell beside the process line", "distribution": "center"},
+        {"id": "safety_perimeter", "bounds_norm": [0.03, 0.06, 0.97, 0.94], "purpose": "safety equipment outside working envelopes", "distribution": "perimeter"},
+        {"id": "service_aisle", "bounds_norm": [0.40, 0.02, 0.60, 0.96], "purpose": "continuous unobstructed operator and maintenance aisle", "distribution": "keep_clear"}
+      ],
+      "validation_targets": ["required_inventory_preserved", "mesh_support_contact", "no_overlap", "machine_front_facing", "robot_clearance", "service_aisle", "camera_anchor_coverage", "render_feedback"]
+    },
+    "industrial_assembly/assembly_line_workshop": {
+      "recommended_shell_preset": "factory_daylight_v1",
+      "style_profile": {
+        "name": "long_flow_assembly_workshop",
+        "palette": ["industrial gray", "safety yellow", "machine white", "signal red", "rack blue"],
+        "materials": ["sealed concrete", "painted steel", "rubber", "corrugated cardboard"],
+        "lighting_mood": "bright continuous production lighting with visible line flow and work faces"
+      },
+      "layout_rules": [
+        {"id": "assembly_flow_axis", "priority": 100, "match": {"semantic_terms": ["assembly_line", "conveyor"]}, "zone": "assembly_axis", "distribution": "line", "orientation_priority": "align_flow_axis"},
+        {"id": "assembly_workstations", "priority": 95, "match": {"semantic_terms": ["workbench", "workstation", "shelf"]}, "zone": "operator_edge", "distribution": "grid", "orientation_priority": "face_assembly_axis"},
+        {"id": "assembly_robot_station", "priority": 100, "match": {"semantic_terms": ["robot", "manipulator"]}, "zone": "robot_station", "distribution": "center", "orientation_priority": "face_assembly_axis"}
+      ],
+      "suggestions": [
+        {"id": "assembly_parts_carton", "layer": "supported_prop", "role": "parts_carton", "query": "small assembly parts carton", "canonical_class": "logistics/container", "counts": {"sparse": 2, "normal": 4, "rich": 8}, "criticality": "detail", "support_target_role": "parts_storage", "zone": "parts_storage", "dedupe_terms": []},
+        {"id": "assembly_fire_extinguisher", "layer": "secondary_furniture", "role": "fire_extinguisher", "query": "workshop fire extinguisher", "canonical_class": "safety/equipment/fire_extinguisher", "counts": {"sparse": 0, "normal": 1, "rich": 2}, "criticality": "medium", "support_target": "floor", "zone": "safety_perimeter", "dedupe_terms": ["fire_extinguisher"]}
+      ],
+      "zones": [
+        {"id": "assembly_axis", "bounds_norm": [0.08, 0.38, 0.92, 0.60], "purpose": "continuous material flow through the assembly line", "distribution": "line"},
+        {"id": "operator_edge", "bounds_norm": [0.10, 0.64, 0.90, 0.92], "purpose": "human workstations facing the line", "distribution": "grid"},
+        {"id": "robot_station", "bounds_norm": [0.64, 0.08, 0.90, 0.34], "purpose": "robotic operation beside the line", "distribution": "center"},
+        {"id": "parts_storage", "bounds_norm": [0.06, 0.08, 0.34, 0.34], "purpose": "parts racks and inbound kits", "distribution": "grid"},
+        {"id": "safety_perimeter", "bounds_norm": [0.03, 0.06, 0.97, 0.94], "purpose": "safety equipment outside working envelopes", "distribution": "perimeter"},
+        {"id": "service_aisle", "bounds_norm": [0.39, 0.02, 0.61, 0.96], "purpose": "continuous unobstructed operator and maintenance aisle", "distribution": "keep_clear"}
+      ],
+      "validation_targets": ["required_inventory_preserved", "mesh_support_contact", "no_overlap", "flow_axis_alignment", "machine_front_facing", "robot_clearance", "service_aisle", "camera_anchor_coverage", "render_feedback"]
+    },
+    "public_transit/subway_fare_zone": {
+      "recommended_shell_preset": "transit_concourse_v1",
+      "style_profile": {
+        "name": "modern_metro_fare_control",
+        "palette": ["terrazzo gray", "wayfinding blue", "brushed metal", "safety yellow"],
+        "materials": ["terrazzo", "stainless steel", "painted cladding", "glass"],
+        "lighting_mood": "bright even concourse lighting with clear fare-machine screens"
+      },
+      "layout_rules": [
+        {"id": "fare_machines_face_gates", "priority": 100, "match": {"semantic_terms": ["ticket_machine", "ticket vending"]}, "zone": "vending_wall", "distribution": "grid", "orientation_priority": "face_target"},
+        {"id": "fare_gate_bank_crosses_flow", "priority": 100, "match": {"semantic_terms": ["ticket_gate", "turnstile"]}, "zone": "fare_control", "distribution": "center", "orientation_priority": "cross_circulation"}
+      ],
+      "suggestions": [
+        {"id": "station_waiting_seat", "layer": "secondary_furniture", "role": "bench", "query": "durable public transit waiting bench", "canonical_class": "furniture/seating/bench", "counts": {"sparse": 0, "normal": 1, "rich": 2}, "criticality": "medium", "support_target": "floor", "zone": "waiting_edge", "dedupe_terms": ["bench", "waiting_seat"]},
+        {"id": "station_waste_bin", "layer": "secondary_furniture", "role": "waste_bin", "query": "public station waste bin", "canonical_class": "household/waste", "counts": {"sparse": 0, "normal": 1, "rich": 2}, "criticality": "detail", "support_target": "floor", "zone": "service_edge", "dedupe_terms": ["waste_bin", "trashcan"]},
+        {"id": "station_wayfinding", "layer": "wall_dressing", "role": "wayfinding_sign", "query": "metro wayfinding sign panel", "canonical_class": "transport/signage", "counts": {"sparse": 1, "normal": 2, "rich": 3}, "criticality": "medium", "mount_target": "wall", "zone": "wayfinding_band", "dedupe_terms": ["wayfinding_sign", "station_sign"]}
+      ],
+      "zones": [
+        {"id": "fare_control", "bounds_norm": [0.24, 0.36, 0.76, 0.66], "purpose": "fare gate bank across passenger flow", "distribution": "center"},
+        {"id": "vending_wall", "bounds_norm": [0.06, 0.62, 0.94, 0.92], "purpose": "ticket vending machines facing fare control", "distribution": "grid"},
+        {"id": "waiting_edge", "bounds_norm": [0.04, 0.08, 0.30, 0.32], "purpose": "short-stay seating outside passenger flow", "distribution": "perimeter"},
+        {"id": "service_edge", "bounds_norm": [0.70, 0.08, 0.96, 0.34], "purpose": "waste and service fixtures", "distribution": "perimeter"},
+        {"id": "wayfinding_band", "bounds_norm": [0.14, 0.80, 0.86, 0.98], "purpose": "high-visibility transit signage", "distribution": "center"},
+        {"id": "passenger_flow", "bounds_norm": [0.34, 0.02, 0.66, 0.96], "purpose": "unobstructed passenger circulation through gates", "distribution": "keep_clear"}
+      ],
+      "validation_targets": ["required_inventory_preserved", "architecture_feature_coverage", "mesh_support_contact", "no_overlap", "facing", "passenger_flow", "style_coherence", "camera_anchor_coverage", "render_feedback"]
+    },
+    "medical_clinical/consulting_room": {
+      "style_profile": {
+        "name": "clean_outpatient_clinic",
+        "palette": ["warm white", "pale blue", "stainless steel", "light gray"],
+        "materials": ["seamless resilient floor", "powder coated metal", "clean laminate", "medical vinyl"],
+        "lighting_mood": "bright diffuse clinical light without harsh glare"
+      },
+      "suggestions": [
+        {"id": "clinic_privacy_screen", "layer": "secondary_furniture", "role": "privacy_screen", "query": "folding hospital privacy screen", "canonical_class": "medical/privacy_screen", "counts": {"sparse": 0, "normal": 1, "rich": 1}, "criticality": "medium", "support_target": "floor", "zone": "patient_center", "dedupe_terms": ["privacy_screen"]},
+        {"id": "clinic_bedside_table", "layer": "secondary_furniture", "role": "bedside_table", "query": "hospital bedside table", "canonical_class": "medical/furniture/bedside_table", "counts": {"sparse": 0, "normal": 1, "rich": 1}, "criticality": "medium", "support_target": "floor", "zone": "patient_center", "dedupe_terms": ["bedside_table"]},
+        {"id": "clinic_disposal_stand", "layer": "secondary_furniture", "role": "clinical_waste_bin", "query": "hospital disposal stand", "canonical_class": "medical/waste_bin", "counts": {"sparse": 0, "normal": 1, "rich": 1}, "criticality": "detail", "support_target": "floor", "zone": "clinical_perimeter", "dedupe_terms": ["disposal_stand", "clinical_waste_bin"]},
+        {"id": "clinic_scale", "layer": "secondary_furniture", "role": "patient_scale", "query": "standing hospital patient scale", "canonical_class": "medical/equipment/scale", "counts": {"sparse": 0, "normal": 0, "rich": 1}, "criticality": "detail", "support_target": "floor", "zone": "clinical_perimeter", "dedupe_terms": ["patient_scale"]},
+        {"id": "clinic_exam_stool", "layer": "secondary_furniture", "role": "medical_stool", "query": "rolling medical examination stool", "canonical_class": "medical/stool", "counts": {"sparse": 0, "normal": 1, "rich": 1}, "criticality": "detail", "support_target": "floor", "zone": "patient_center", "dedupe_terms": ["medical_stool", "exam_stool"]},
+        {"id": "clinic_tissue_box", "layer": "supported_prop", "role": "tissue_box", "query": "rectangular tissue box", "canonical_class": "medical/consumable/tissue_box", "counts": {"sparse": 0, "normal": 1, "rich": 1}, "criticality": "detail", "support_target_role": "doctor_desk", "zone": "consultation_left", "dedupe_terms": ["tissue_box"]},
+        {"id": "clinic_instrument_tray", "layer": "supported_prop", "role": "medical_tray", "query": "stainless medical instrument tray", "canonical_class": "medical/instrument_tray", "counts": {"sparse": 0, "normal": 1, "rich": 1}, "criticality": "detail", "support_target_role": "medical_cart", "zone": "clinical_perimeter", "dedupe_terms": ["instrument_tray"]},
+        {"id": "clinic_pill_bottles", "layer": "supported_prop", "role": "pill_bottle_set", "query": "hospital pill bottle set", "canonical_class": "medical/consumable/medicine", "counts": {"sparse": 0, "normal": 1, "rich": 1}, "criticality": "detail", "support_target_role": "bedside_table", "zone": "patient_center", "dedupe_terms": ["pill_bottle"]},
+        {"id": "clinic_waste_bin", "layer": "secondary_furniture", "role": "clinical_waste_bin", "query": "small clinical pedal waste bin", "canonical_class": "medical/waste_bin", "counts": {"sparse": 0, "normal": 1, "rich": 1}, "criticality": "detail", "support_target": "floor", "zone": "clinical_perimeter", "dedupe_terms": ["waste_bin"]},
+        {"id": "clinic_wall_chart", "layer": "wall_dressing", "role": "medical_chart", "query": "framed medical anatomy wall chart", "canonical_class": "medical/wall_chart", "counts": {"sparse": 0, "normal": 0, "rich": 1}, "criticality": "detail", "mount_target": "wall", "zone": "clinical_perimeter", "dedupe_terms": ["medical_chart", "anatomy_chart"]}
+      ],
+      "surface_prop_budgets": [
+        {"support_role": "doctor_desk", "minimum": {"sparse": 0, "normal": 1, "rich": 1}, "maximum": {"sparse": 1, "normal": 3, "rich": 4}},
+        {"support_role": "medical_cart", "minimum": {"sparse": 0, "normal": 1, "rich": 1}, "maximum": {"sparse": 1, "normal": 2, "rich": 3}}
+      ],
+      "zones": [
+        {"id": "patient_center", "bounds_norm": [0.34, 0.25, 0.66, 0.73], "purpose": "patient examination cell", "distribution": "center"},
+        {"id": "consultation_left", "bounds_norm": [0.08, 0.12, 0.38, 0.48], "purpose": "doctor consultation desk", "distribution": "center"},
+        {"id": "clinical_perimeter", "bounds_norm": [0.08, 0.10, 0.92, 0.90], "purpose": "mobile clinical equipment and storage", "distribution": "perimeter"}
+      ],
+      "validation_targets": ["required_inventory_preserved", "mesh_support_contact", "no_overlap", "facing", "circulation", "clinical_cleanliness", "camera_anchor_coverage", "render_feedback"]
+    },
+    "warehouse_logistics/warehouse_packing_area": {
+      "style_profile": {
+        "name": "active_packing_cell",
+        "palette": ["industrial gray", "safety yellow", "kraft cardboard", "blue rack"],
+        "materials": ["sealed concrete", "painted steel", "corrugated cardboard", "wood pallet"],
+        "lighting_mood": "bright high-bay industrial illumination"
+      },
+      "suggestions": [
+        {"id": "warehouse_label_printer", "layer": "supported_prop", "role": "label_printer", "query": "industrial shipping label printer", "canonical_class": "warehouse/label_printer", "counts": {"sparse": 0, "normal": 1, "rich": 1}, "criticality": "medium", "support_target_role": "packing_table", "zone": "packing_cell", "dedupe_terms": ["label_printer"]},
+        {"id": "warehouse_tape_dispenser", "layer": "supported_prop", "role": "tape_dispenser", "query": "packing tape dispenser", "canonical_class": "warehouse/tape_dispenser", "counts": {"sparse": 1, "normal": 1, "rich": 2}, "criticality": "detail", "support_target_role": "packing_table", "zone": "packing_cell", "dedupe_terms": ["tape_dispenser"]},
+        {"id": "warehouse_barcode_scanner", "layer": "supported_prop", "role": "barcode_scanner", "query": "handheld warehouse barcode scanner", "canonical_class": "electronics/retail/barcode_scanner", "counts": {"sparse": 0, "normal": 1, "rich": 1}, "criticality": "medium", "support_target_role": "packing_table", "zone": "packing_cell", "dedupe_terms": ["barcode_scanner"]},
+        {"id": "warehouse_extra_box", "layer": "supported_prop", "role": "cardboard_box", "query": "corrugated shipping box", "canonical_class": "warehouse/cardboard_box", "counts": {"sparse": 1, "normal": 2, "rich": 4}, "criticality": "detail", "support_target_role": "packing_table", "zone": "packing_cell", "dedupe_terms": []},
+        {"id": "warehouse_safety_cone", "layer": "decor", "role": "safety_cone", "query": "industrial safety traffic cone", "canonical_class": "safety/traffic_cone", "counts": {"sparse": 0, "normal": 1, "rich": 2}, "criticality": "detail", "support_target": "floor", "zone": "trolley_parking", "dedupe_terms": ["safety_cone"]}
+      ],
+      "surface_prop_budgets": [
+        {"support_role": "packing_table", "minimum": {"sparse": 1, "normal": 3, "rich": 5}, "maximum": {"sparse": 2, "normal": 5, "rich": 8}}
+      ],
+      "zones": [
+        {"id": "packing_cell", "bounds_norm": [0.52, 0.48, 0.88, 0.76], "purpose": "packing worktable and tools", "distribution": "center"},
+        {"id": "trolley_parking", "bounds_norm": [0.10, 0.12, 0.28, 0.34], "purpose": "mobile equipment parking outside the central aisle", "distribution": "center"},
+        {"id": "central_transport_aisle", "bounds_norm": [0.41, 0.04, 0.59, 0.94], "purpose": "keep clear transport aisle", "distribution": "keep_clear"}
+      ],
+      "validation_targets": ["required_inventory_preserved", "mesh_support_contact", "no_overlap", "transport_aisle", "circulation", "camera_anchor_coverage", "render_feedback"]
+    },
+    "warehouse_logistics/logistics_transfer_zone": {
+      "recommended_shell_preset": "factory_daylight_v1",
+      "style_profile": {
+        "name": "robotic_conveyor_transfer_warehouse",
+        "palette": ["industrial gray", "safety yellow", "kraft cardboard", "rack blue", "robot orange"],
+        "materials": ["sealed concrete", "painted steel", "corrugated cardboard", "wood pallet"],
+        "lighting_mood": "bright high-bay warehouse lighting with clear transfer and storage zones"
+      },
+      "layout_rules": [
+        {"id": "logistics_conveyor_flow", "priority": 100, "match": {"semantic_terms": ["conveyor"]}, "zone": "transfer_line", "distribution": "line", "orientation_priority": "align_flow_axis"},
+        {"id": "logistics_robot_transfer", "priority": 100, "match": {"semantic_terms": ["robot", "manipulator"]}, "zone": "robot_transfer", "distribution": "center", "orientation_priority": "face_transfer_line"},
+        {"id": "logistics_rack_bank", "priority": 90, "match": {"semantic_terms": ["rack", "shelf"]}, "zone": "storage_bank", "distribution": "grid", "orientation_priority": "face_transport_aisle"},
+        {"id": "logistics_pallet_staging", "priority": 90, "match": {"semantic_terms": ["pallet", "load"]}, "zone": "pallet_staging", "distribution": "grid", "orientation_priority": "align_storage_grid"}
+      ],
+      "suggestions": [
+        {"id": "logistics_shipping_box", "layer": "supported_prop", "role": "cardboard_box", "query": "corrugated shipping box", "canonical_class": "warehouse/cardboard_box", "counts": {"sparse": 2, "normal": 6, "rich": 10}, "criticality": "detail", "support_target_role": "pallet", "zone": "pallet_staging", "dedupe_terms": []},
+        {"id": "logistics_safety_cone", "layer": "decor", "role": "safety_cone", "query": "warehouse safety traffic cone", "canonical_class": "safety/traffic_cone", "counts": {"sparse": 0, "normal": 2, "rich": 4}, "criticality": "detail", "support_target": "floor", "zone": "safety_perimeter", "dedupe_terms": []}
+      ],
+      "zones": [
+        {"id": "transfer_line", "bounds_norm": [0.18, 0.38, 0.82, 0.60], "purpose": "continuous conveyor transfer path", "distribution": "line"},
+        {"id": "robot_transfer", "bounds_norm": [0.62, 0.62, 0.88, 0.90], "purpose": "robotic pallet or conveyor transfer cell", "distribution": "center"},
+        {"id": "storage_bank", "bounds_norm": [0.06, 0.64, 0.42, 0.94], "purpose": "bounded rack storage bank", "distribution": "grid"},
+        {"id": "pallet_staging", "bounds_norm": [0.08, 0.08, 0.42, 0.34], "purpose": "inbound and outbound pallet clusters", "distribution": "grid"},
+        {"id": "safety_perimeter", "bounds_norm": [0.03, 0.06, 0.97, 0.94], "purpose": "safety markers outside equipment envelopes", "distribution": "perimeter"},
+        {"id": "transport_aisle", "bounds_norm": [0.42, 0.02, 0.58, 0.96], "purpose": "continuous unobstructed AMR and pedestrian aisle", "distribution": "keep_clear"}
+      ],
+      "validation_targets": ["required_inventory_preserved", "mesh_support_contact", "no_overlap", "flow_axis_alignment", "robot_clearance", "transport_aisle", "bounded_repetition", "camera_anchor_coverage", "render_feedback"]
+    },
+    "laboratory/teaching_laboratory": {
+      "style_profile": {
+        "name": "modern_teaching_lab",
+        "palette": ["light gray", "white", "stainless steel", "safety blue"],
+        "materials": ["chemical resistant worktop", "powder coated steel", "vinyl floor", "glassware"],
+        "lighting_mood": "even bright teaching illumination with visible task highlights"
+      },
+      "suggestions": [
+        {"id": "lab_reagent_bottle", "layer": "supported_prop", "role": "reagent_bottle", "query": "laboratory reagent bottle", "canonical_class": "laboratory/glassware/reagent_bottle", "counts": {"sparse": 1, "normal": 3, "rich": 5}, "criticality": "detail", "support_target_role": "lab_bench", "zone": "teaching_core", "dedupe_terms": []},
+        {"id": "lab_beaker", "layer": "supported_prop", "role": "beaker", "query": "glass laboratory beaker", "canonical_class": "laboratory/glassware/beaker", "counts": {"sparse": 1, "normal": 2, "rich": 3}, "criticality": "detail", "support_target_role": "lab_bench", "zone": "teaching_core", "dedupe_terms": []},
+        {"id": "lab_instrument_tray", "layer": "supported_prop", "role": "instrument_tray", "query": "laboratory instrument tray", "canonical_class": "laboratory/instrument_tray", "counts": {"sparse": 0, "normal": 1, "rich": 2}, "criticality": "detail", "support_target_role": "lab_bench", "zone": "teaching_core", "dedupe_terms": ["instrument_tray"]},
+        {"id": "lab_protocol_notebook", "layer": "supported_prop", "role": "lab_notebook", "query": "open laboratory protocol notebook", "canonical_class": "office/notebook", "counts": {"sparse": 0, "normal": 1, "rich": 2}, "criticality": "detail", "support_target_role": "lab_bench", "zone": "teaching_core", "dedupe_terms": ["lab_notebook"]},
+        {"id": "lab_fire_extinguisher", "layer": "secondary_furniture", "role": "fire_extinguisher", "query": "laboratory fire extinguisher", "canonical_class": "safety/equipment/fire_extinguisher", "counts": {"sparse": 0, "normal": 1, "rich": 1}, "criticality": "medium", "support_target": "floor", "zone": "storage_perimeter", "dedupe_terms": ["fire_extinguisher"]},
+        {"id": "lab_safety_bin", "layer": "secondary_furniture", "role": "laboratory_waste_bin", "query": "laboratory safety waste bin", "canonical_class": "laboratory/waste_bin", "counts": {"sparse": 0, "normal": 1, "rich": 1}, "criticality": "detail", "support_target": "floor", "zone": "storage_perimeter", "dedupe_terms": ["safety_bin", "waste_bin"]},
+        {"id": "lab_wall_chart", "layer": "wall_dressing", "role": "science_chart", "query": "framed science laboratory wall chart", "canonical_class": "laboratory/wall_chart", "counts": {"sparse": 0, "normal": 0, "rich": 1}, "criticality": "detail", "mount_target": "wall", "zone": "storage_perimeter", "dedupe_terms": ["science_chart"]}
+      ],
+      "surface_prop_budgets": [
+        {"support_role": "lab_bench", "minimum": {"sparse": 1, "normal": 3, "rich": 5}, "maximum": {"sparse": 3, "normal": 6, "rich": 9}}
+      ],
+      "zones": [
+        {"id": "teaching_core", "bounds_norm": [0.20, 0.20, 0.80, 0.76], "purpose": "paired teaching benches and instruments", "distribution": "grid"},
+        {"id": "storage_perimeter", "bounds_norm": [0.08, 0.10, 0.92, 0.90], "purpose": "wall storage and safety equipment", "distribution": "perimeter"}
+      ],
+      "validation_targets": ["required_inventory_preserved", "mesh_support_contact", "no_overlap", "facing", "circulation", "laboratory_safety", "camera_anchor_coverage", "render_feedback"]
+    }
+  }
+}

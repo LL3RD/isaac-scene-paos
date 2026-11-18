@@ -1,0 +1,19 @@
+Isaac Scene PhyAgentOS Integration
+Copyright 2026 Isaac Scene contributors
+
+The project-owned source and documentation are licensed under Apache-2.0.
+core/ is the unchanged, cleaned isaac-scene-skill-lite source snapshot identified
+in upstream.lock.json. Its original source inventory and hashes are retained.
+adapter/ derives from the previously validated 0.4.0 integration. Repository
+packaging, build provenance, documentation and portable fixtures were added here.
+
+PhyAgentOS Core, adapter-forge-gateway, Forge, Dora, Python, NVIDIA Isaac Sim,
+OpenUSD and other dependencies retain their respective licenses. They are not
+relicensed by this NOTICE. Fetched upstream sources are excluded from this
+repository. Native builds collect available dependency license/notice files;
+publishers must review those files and redistribution terms before publication.
+
+No third-party environment, robot, texture or commercial asset library is
+included. The tiny USD test fixture and generated box-based demo are test data,
+not a redistribution of Synthesis, NVIDIA Factory or Fabrica assets. Asset catalog
+approval flags do not confer ownership or a license to redistribute assets.

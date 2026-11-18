@@ -1,0 +1,10 @@
+{
+  "schema_version": "isaac-scene-domain/v1",
+  "name": "laboratory",
+  "description": "Laboratory rooms, instruments, benches, sensors, and robotic workstations.",
+  "triggers": {"en": ["laboratory", "lab", "instrument", "experiment"], "zh": ["实验室", "实验", "仪器", "实验台"]},
+  "roles": ["background", "lab_bench", "instrument", "robot", "sensor", "camera"],
+  "search_libraries": ["geniesim", "isaac_official", "grscenes_scenes", "curated_common"],
+  "validation_profile": "laboratory",
+  "workflow": "workflow.md"
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": "isaac-scene-ontology/v1",
+  "synonyms": {
+    "课桌": ["student desk", "classroom desk"],
+    "学生椅": ["student chair", "classroom chair"],
+    "讲台": ["teacher desk", "lectern"],
+    "黑板": ["blackboard", "whiteboard"],
+    "游乐设施": ["playground equipment", "play structure"],
+    "玩具柜": ["toy storage", "classroom storage"]
+  }
+}

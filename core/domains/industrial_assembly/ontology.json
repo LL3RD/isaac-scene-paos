@@ -1,0 +1,19 @@
+{
+  "schema_version": "isaac-scene-ontology/v1",
+  "synonyms": {
+    "机械臂": ["robot arm", "manipulator"],
+    "工业机器": ["industrial machine", "factory machine"],
+    "工业设备": ["industrial equipment", "factory equipment"],
+    "传送带": ["conveyor belt", "conveyor"],
+    "输送机": ["belt conveyor", "conveyor"],
+    "装配": ["assembly", "workcell"],
+    "定位板": ["locating board", "optical board"],
+    "夹具": ["fixture", "pickup fixture"],
+    "零件": ["part", "assembly part"],
+    "工作台": ["worktable", "workbench", "support table"],
+    "轮式人形机器人": ["wheeled humanoid mobile dual arm robot", "g2 omnipicker"],
+    "四足机器人": ["quadruped robot", "robot dog", "go2"],
+    "弗兰卡": ["franka panda"],
+    "法兰卡": ["franka panda"]
+  }
+}

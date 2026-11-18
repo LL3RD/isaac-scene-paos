@@ -1,0 +1,4 @@
+interface:
+  display_name: "Isaac Scene Builder Lite"
+  short_description: "从文本、图片、USD 或 Blender 输入构建细节场景并闭环验证"
+  default_prompt: "Use $isaac-scene-skill-lite to build or revise my scene from text, images, USD or Blender inputs, preserve sources, and verify geometry, material roundtrip, actual renders and requested physics."

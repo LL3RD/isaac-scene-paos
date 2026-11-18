@@ -1,0 +1,42 @@
+{
+    "schema_version": "isaac-scene-domain/v1",
+    "name": "industrial_assembly",
+    "description": "Industrial workcells, manipulators, fixtures, and Fabrica assembly recipes.",
+    "triggers": {
+        "en": [
+            "assembly",
+            "factory",
+            "workcell",
+            "fixture",
+            "robot arm",
+            "fabrica"
+        ],
+        "zh": [
+            "\u88c5\u914d",
+            "\u5de5\u5382",
+            "\u5de5\u4f4d",
+            "\u5b9a\u4f4d\u677f",
+            "\u5939\u5177",
+            "\u673a\u68b0\u81c2",
+            "\u96f6\u4ef6"
+        ]
+    },
+    "roles": [
+        "background",
+        "support",
+        "assembly_set",
+        "manipulator_group",
+        "fixture",
+        "tray",
+        "camera"
+    ],
+    "search_libraries": [
+        "fabrica_task_bundles",
+        "curated_common",
+        "isaac_official",
+        "industrial",
+        "geniesim"
+    ],
+    "validation_profile": "industrial_assembly",
+    "workflow": "workflow.md"
+}

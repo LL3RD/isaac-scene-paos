@@ -1,0 +1,6 @@
+{
+  "schema_version": "isaac-scene-defaults/v1",
+  "default_profile": null,
+  "profile_env": "ISAAC_SCENE_PROFILE",
+  "config_env": "ISAAC_SCENE_SKILL_CONFIG"
+}

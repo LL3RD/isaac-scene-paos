@@ -1,0 +1,9 @@
+{
+  "schema_version": "isaac-scene-ontology/v1",
+  "synonyms": {
+    "实验室": ["laboratory", "lab"],
+    "实验台": ["laboratory bench", "lab table"],
+    "仪器": ["instrument", "equipment"],
+    "传感器": ["sensor", "camera"]
+  }
+}

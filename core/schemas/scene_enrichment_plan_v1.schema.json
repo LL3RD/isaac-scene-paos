@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "isaac-scene-enrichment-plan/v1",
+  "type": "object",
+  "required": ["schema_version", "input_provenance", "domain", "room_type", "density", "policies", "generation_phases", "density_control", "layers", "surface_prop_budgets", "validation_targets"],
+  "properties": {
+    "schema_version": {"const": "isaac-scene-enrichment-plan/v1"},
+    "input_provenance": {
+      "type": "object",
+      "required": ["mode", "reference_images", "pose_source"],
+      "properties": {
+        "mode": {"enum": ["text", "image", "hybrid"]},
+        "text": {"type": "string"},
+        "reference_images": {"type": "array"},
+        "pose_source": {"const": "none"}
+      },
+      "additionalProperties": true
+    },
+    "domain": {"type": "string"},
+    "room_type": {"type": "string"},
+    "density": {"enum": ["sparse", "normal", "rich"]},
+    "profile_id": {"type": "string"},
+    "recommended_shell_preset": {"type": ["string", "null"]},
+    "style_profile": {"type": "object"},
+    "policies": {"type": "object"},
+    "generation_phases": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "objective", "advance_requires_content_accept"],
+        "properties": {
+          "id": {"enum": ["anchors", "functional", "detail"]},
+          "objective": {"type": "string"},
+          "advance_requires_content_accept": {"const": true}
+        },
+        "additionalProperties": true
+      }
+    },
+    "density_control": {"type": "object"},
+    "zones": {"type": "array", "items": {"type": "object"}},
+    "layout_rules": {"type": "array", "items": {"type": "object"}},
+    "functional_groups": {"type": "array", "items": {"type": "object"}},
+    "layers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "order", "requests"],
+        "properties": {
+          "id": {"type": "string"},
+          "order": {"type": "integer", "minimum": 0},
+          "requests": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "role", "query", "canonical_class", "count", "binding_status"],
+              "properties": {
+                "id": {"type": "string"},
+                "role": {"type": "string"},
+                "query": {"type": "string"},
+                "canonical_class": {"type": "string"},
+                "count": {"type": "integer", "minimum": 1},
+                "binding_status": {"const": "asset_search_required"},
+                "criticality": {"enum": ["anchor", "medium", "detail"]}
+              },
+              "additionalProperties": true
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "surface_prop_budgets": {"type": "array", "items": {"type": "object"}},
+    "already_satisfied": {"type": "array", "items": {"type": "object"}},
+    "validation_targets": {"type": "array", "items": {"type": "string"}},
+    "metrics": {"type": "object"}
+  },
+  "additionalProperties": true
+}

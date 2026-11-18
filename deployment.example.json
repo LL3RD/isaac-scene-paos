@@ -1,0 +1,38 @@
+{
+  "core_root": "/path/to/isaac-scene-paos/core",
+  "isaac_python": "/path/to/isaac-runtime/bin/python",
+  "work_root": "/path/to/private/scene-jobs",
+  "gpu_lock": "/path/to/private/shared-gpu0.lock",
+  "gpu_index": 0,
+  "job_timeout_s": 900,
+  "catalogs": {
+    "synthesis": {
+      "path": "/path/to/reviewed/catalog/objects.sqlite",
+      "entrypoint_roots": ["/path/to/reviewed/entrypoints"],
+      "allowed_use_scope": "internal_noncommercial_research"
+    },
+    "semantic": {
+      "path": "/path/to/semantic_assets.sqlite",
+      "entrypoint_roots": ["/path/to/reviewed/assets"],
+      "approved_assets": {
+        "indexed:reviewed_object": {
+          "asset_scope": "independent_object",
+          "source_library": "operator_library",
+          "license_status": "existing_local_asset",
+          "support_mode": "floor",
+          "allowed_use_scope": "operator_local_review",
+          "attribution": "Use the reviewed asset attribution here"
+        }
+      }
+    }
+  },
+  "assets": {
+    "approved_workbench": {
+      "path": "/path/to/reviewed/workbench.usda",
+      "label": "Reviewed workbench",
+      "tags": ["workbench", "table"],
+      "support_mode": "floor",
+      "metadata": {}
+    }
+  }
+}

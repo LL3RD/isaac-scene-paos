@@ -1,0 +1,43 @@
+{
+  "schema_version": "isaac-scene-render-profiles/v1",
+  "profiles": {
+    "preview": {
+      "purpose": "Fast layout, camera, and gross-lighting iteration; never use as final visual evidence.",
+      "renderer": "RayTracedLighting",
+      "width": 960,
+      "height": 540,
+      "anti_aliasing": 2,
+      "settle_frames": 8,
+      "camera_settle_frames": 8,
+      "evidence_rt_subframes": 1
+    },
+    "review": {
+      "purpose": "Stable Agent and human review with readable materials and optional pixel evidence.",
+      "renderer": "RayTracedLighting",
+      "width": 1280,
+      "height": 720,
+      "anti_aliasing": 2,
+      "settle_frames": 30,
+      "camera_settle_frames": 24,
+      "evidence_rt_subframes": 4
+    },
+    "final": {
+      "purpose": "High-quality fixed-camera evidence after geometry, camera, and content are frozen.",
+      "renderer": "PathTracing",
+      "width": 1920,
+      "height": 1080,
+      "anti_aliasing": 0,
+      "settle_frames": 16,
+      "camera_settle_frames": 32,
+      "evidence_rt_subframes": 8,
+      "path_tracing": {
+        "spp": 64,
+        "total_spp": 1024,
+        "max_bounces": 8,
+        "max_specular_and_transmission_bounces": 6,
+        "max_volume_bounces": 4,
+        "optix_denoiser": true
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "phyagentos_core": {
+    "repository": "https://github.com/PhyAgentOS/PhyAgentOS-core",
+    "commit": "c34f6f015541f67a67066e81ec7aa5fe761f80ca",
+    "commit_evidence": "GitHub source archive global PAX comment",
+    "source_archive_sha256": "0afef694a482e6758b83415129a09abf301a758ef2a20927fc7b19a21d41397a",
+    "fetch_archive_sha256": "54c0e32a270185c41a4a332b7478302b047aff2c70abe0f04497205e743b200d"
+  },
+  "gateway_and_bundled_forge_tool": {
+    "repository": "https://github.com/PhyAgentOS/adapter-forge-gateway",
+    "commit": "5aaa9d16aff1c1b689dbb53acbcdef406dcb8d97",
+    "source_archive_sha256": "b170feb20f5e2cf61a05cf855d23bd787af9bb8447c7247d6c92659450a93517",
+    "fetch_archive_sha256": "b170feb20f5e2cf61a05cf855d23bd787af9bb8447c7247d6c92659450a93517"
+  },
+  "dora_rs": "0.4.1",
+  "dora_cli": "0.4.1",
+  "forge_msgs": "1.3.0",
+  "scene_core": {
+    "artifact": "isaac-scene-skill-lite-stage1.zip",
+    "sha256": "73707287f35057eba02097e97e34729a2aeeb59817a7fb4dd4a0efcfcb09a7f2",
+    "path": "core",
+    "inventory": "core.lock.json",
+    "policy": "vendored unchanged clean source; archive is provenance only, not a runtime dependency"
+  }
+}

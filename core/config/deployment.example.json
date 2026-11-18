@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "deployment_configured": true,
+  "runtime": {
+    "python": {"executable": "${ISAAC_PYTHON}", "kind": "isaacsim_python"},
+    "output_root": "${ISAAC_WORKSPACE}/runs",
+    "state_root": "${ISAAC_WORKSPACE}/cache"
+  },
+  "libraries": [
+    {"name": "industrial", "scanner": "usd_tree", "root": "${ISAAC_ASSET_ROOT}/industrial", "required": true}
+  ],
+  "search_policy": {"default_libraries": ["industrial"], "allow_slow_fallback_by_default": false},
+  "semantic_catalog": {"read_only_adapters": []}
+}

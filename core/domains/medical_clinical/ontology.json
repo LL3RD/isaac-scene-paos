@@ -1,0 +1,12 @@
+{
+  "schema_version": "isaac-scene-ontology/v1",
+  "synonyms": {
+    "手术床": ["operating table", "surgical table", "delivery bed"],
+    "检查床": ["examination bed", "patient examination table"],
+    "无影灯": ["surgical shadowless lamp", "operating light"],
+    "麻醉机": ["anesthesia machine"],
+    "监护仪": ["patient monitor", "medical monitor"],
+    "医疗推车": ["medical cart", "instrument cart"],
+    "病床": ["hospital bed", "patient bed"]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "isaac-scene-ontology/v1",
+  "synonyms": {
+    "仓库": ["warehouse", "storage environment"],
+    "货架": ["rack", "shelf"],
+    "托盘": ["pallet", "tray"],
+    "叉车": ["forklift"],
+    "搬运机器人": ["mobile robot", "amr", "transport robot"]
+  }
+}

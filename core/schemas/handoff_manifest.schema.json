@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "isaac-scene-handoff/v1",
+  "type": "object",
+  "required": ["schema_version", "handoff_id", "created_at", "goal", "domain", "phase", "artifacts", "open_issues", "next_recommended_actions"],
+  "properties": {
+    "schema_version": {"const": "isaac-scene-handoff/v1"},
+    "handoff_id": {"type": "string"},
+    "created_at": {"type": "string"},
+    "goal": {"type": "string"},
+    "domain": {"type": "string"},
+    "phase": {"type": "string"},
+    "artifacts": {"type": "array", "items": {"type": "object"}},
+    "selected_assets": {"type": "array", "items": {"type": "object"}},
+    "unit_audit": {"type": "object"},
+    "completed_steps": {"type": "array", "items": {"type": "string"}},
+    "open_issues": {"type": "array", "items": {"type": "object"}},
+    "next_recommended_actions": {"type": "array", "items": {"type": "string"}},
+    "environment_fingerprint": {"type": "object"}
+  },
+  "additionalProperties": true
+}

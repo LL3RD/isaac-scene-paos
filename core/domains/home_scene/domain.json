@@ -1,0 +1,10 @@
+{
+  "schema_version": "isaac-scene-domain/v1",
+  "name": "home_scene",
+  "description": "Homes and indoor living spaces using complete backgrounds and relation-aware furniture placement rules.",
+  "triggers": {"en": ["home", "living room", "bedroom", "kitchen", "study", "dining room"], "zh": ["家居", "住宅", "客厅", "卧室", "厨房", "书房", "餐厅"]},
+  "roles": ["background", "anchor_furniture", "support_furniture", "small_object", "wall_object", "light", "camera"],
+  "search_libraries": ["geniesim", "asset_catalog", "grscenes_scenes", "isaac_official", "curated_common"],
+  "validation_profile": "home_scene",
+  "workflow": "README.md"
+}

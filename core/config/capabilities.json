@@ -1,0 +1,372 @@
+{
+  "schema_version": "isaac-scene-capabilities/v1",
+  "skill": "isaac-scene-skill-lite",
+  "agent_loop_owner": "external_harness",
+  "capabilities": [
+    {
+      "name": "init-scene-task",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "check-scene-task",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "create-usd-revision",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "prepare-usd-assets",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "doctor",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "list-domains",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "list-room-shell-presets",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "list-architectural-shells",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "inspect-architectural-shell-spatial",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "select-architectural-shell",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "apply-architectural-shell",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "route-domain",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "init-scene-brief",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "plan-scene-enrichment",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "audit-prompt-regression-suite",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "materialize-scene-enrichment",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "apply-room-shell-preset",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "validate-scene-brief",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "compile-scene-brief",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "list-libraries",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "asset-inventory",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "search-assets",
+      "mutability": "cache_write",
+      "retryable": true
+    },
+    {
+      "name": "list-semantic-classes",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "search-semantic-assets",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "search-visual-assets",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "annotate-semantic-asset",
+      "mutability": "cache_write",
+      "retryable": true
+    },
+    {
+      "name": "get-fabrica-recipe",
+      "mutability": "cache_write",
+      "retryable": true
+    },
+    {
+      "name": "list-home-backgrounds",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "inspect-asset-health",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "inspect-asset-local-geometry",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "inspect-asset-units",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "make-scene",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "validate-scene",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "inspect-bounds",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "inspect-articulation-joints",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "pose-articulation",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "initialize-articulation",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "inspect-scene-overlaps",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "inspect-support-contact",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "solve-support-placement",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "derive-constraint-layout-spec",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "derive-semantic-layout-spec",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "solve-scene-placement-batch",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "extract-synthesis-support-relations",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "refine-synthesis-support-relations",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "build-synthesis28-scene-kits",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "search-synthesis28-scene-kits",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "export-synthesis28-reconstruction-specs",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "evaluate-synthesis28-reconstruction",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "evaluate-synthesis28-material-parity",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "create-synthesis28-render-pair",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "create-synthesis28-camera-candidates",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "rank-synthesis28-camera-renders",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "create-prompt-camera-candidates",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "rank-prompt-camera-renders",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "create-visual-review-packet",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "validate-visual-agent-review",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "create-quality-review-packet",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "validate-quality-agent-review",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "create-content-iteration-packet",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "validate-content-iteration-review",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "create-scene-revision-request",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "confirm-prompt-camera-selection",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "promote-prompt-camera",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "inspect-functional-groups",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "inspect-facing",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "inspect-layout-coverage",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "inspect-render-feedback",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "inspect-reference-match",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "evaluate-scene-quality",
+      "mutability": "read_only",
+      "retryable": true
+    },
+    {
+      "name": "compose-scene-summary",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "export-handoff",
+      "mutability": "artifact_write",
+      "retryable": true
+    },
+    {
+      "name": "verify-handoff",
+      "mutability": "read_only",
+      "retryable": true
+    }
+  ]
+}

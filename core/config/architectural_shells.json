@@ -1,0 +1,70 @@
+{
+  "schema_version": "isaac-architectural-shell-library/v1",
+  "shells": {
+    "grscenes_home_architecture_mvu_v1": {
+      "kind": "asset_backed_filtered",
+      "room_types": ["home", "apartment", "multi_room"],
+      "features": ["doors", "windows", "lights"],
+      "occupancy": "architecture_only",
+      "library": "grscenes_scenes",
+      "relative_path": "home_scenes/scenes/MVUCSQAKTKJ5EAABAAAAACQ8_usd/start_result_navigation.usd",
+      "scale": [0.01, 0.01, 0.01],
+      "unit_mode": "preserve",
+      "prim_overrides": [
+        {"prim": "/World/Background/Meshes/Furnitures", "visible": false},
+        {"prim": "/World/Background/Meshes/Animation", "visible": false},
+        {"prim": "/World/Background/Meshes/BaseAnimation/cabinet", "visible": false}
+      ],
+      "evidence": {
+        "base_prim": "/Root/Meshes/Base",
+        "floor_scope_prim": "/Root/Meshes/Base/ground",
+        "composed_floor_scope_prim": "/World/Background/Meshes/Base/ground",
+        "door_prim": "/Root/Meshes/BaseAnimation/door",
+        "window_prim": "/Root/Meshes/BaseAnimation/window",
+        "lights_prim": "/Root/lights",
+        "unit_status": "centimeter_override_verified_by_door_window_and_shell_bbox",
+        "unit_evidence": {
+          "unscaled_door_height": 249.2000043133694,
+          "expected_door_height_m": 2.492000043133694,
+          "scale_override": 0.01,
+          "audit": "world_mesh_points_2026-08-09"
+        },
+        "audit": "usd_structure_2026-08-09"
+      }
+    },
+    "geniesim_room_1": {
+      "kind": "asset_backed",
+      "room_types": ["room", "empty_room", "home"],
+      "features": ["lights"],
+      "occupancy": "empty",
+      "library": "geniesim",
+      "relative_path": "background/room/room_1/background.usda",
+      "evidence": {
+        "lights": "six authored RectLights",
+        "missing_features": ["doors", "windows"],
+        "audit": "usd_structure_2026-08-08"
+      }
+    },
+    "office_glazed_v1": {
+      "kind": "procedural_preset",
+      "room_types": ["office", "meeting_room"],
+      "features": ["glazing", "lights"],
+      "occupancy": "empty",
+      "preset": "office_glazed_v1"
+    },
+    "transit_concourse_v1": {
+      "kind": "procedural_preset",
+      "room_types": ["subway_station", "subway_fare_zone", "station_concourse", "ticket_hall", "public_transit"],
+      "features": ["lights"],
+      "occupancy": "empty",
+      "preset": "transit_concourse_v1"
+    },
+    "factory_daylight_v1": {
+      "kind": "procedural_preset",
+      "room_types": ["factory", "industrial"],
+      "features": ["windows", "lights"],
+      "occupancy": "empty",
+      "preset": "factory_daylight_v1"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "isaac-scene-ontology/v1",
+  "synonyms": {
+    "场景": ["scene", "environment"],
+    "环境": ["environment", "background"],
+    "背景": ["background", "environment"],
+    "机器人": ["robot"],
+    "相机": ["camera", "sensor"],
+    "会议室": ["meeting room", "conference room", "office"],
+    "办公室": ["office", "workplace"],
+    "教室": ["classroom", "school room"],
+    "诊室": ["consulting room", "clinic room"],
+    "病房": ["ward", "hospital room"],
+    "商店": ["store", "retail room"]
+  }
+}

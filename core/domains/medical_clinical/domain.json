@@ -1,0 +1,31 @@
+{
+  "schema_version": "isaac-scene-domain/v1",
+  "name": "medical_clinical",
+  "description": "Operating rooms, wards, consulting rooms and clinical equipment scenes.",
+  "triggers": {
+    "en": ["operating room", "surgical", "ward", "consulting room", "clinic", "clinical", "hospital"],
+    "zh": ["手术室", "外科", "病房", "诊室", "门诊", "临床", "医院"]
+  },
+  "roles": ["room_shell", "patient_support", "procedure_light", "medical_equipment", "monitor", "cart", "storage", "sink", "camera"],
+  "search_libraries": ["isaac_official", "asset_catalog", "geniesim", "grscenes_scenes", "curated_common"],
+  "validation_profile": "medical_clinical",
+  "layout_profile": {
+    "default_zone": "clinical_perimeter",
+    "default_zones": [
+      {"id": "procedure_center", "bounds_norm": [0.34, 0.30, 0.66, 0.70], "purpose": "patient support and primary procedure anchor", "distribution": "center"},
+      {"id": "overhead_ring", "bounds_norm": [0.22, 0.18, 0.78, 0.82], "purpose": "ceiling procedure equipment around the patient support", "distribution": "perimeter"},
+      {"id": "clinical_left", "bounds_norm": [0.08, 0.18, 0.30, 0.82], "purpose": "left-side staff equipment with central circulation clear", "distribution": "grid"},
+      {"id": "clinical_right", "bounds_norm": [0.70, 0.18, 0.92, 0.82], "purpose": "right-side staff equipment with central circulation clear", "distribution": "grid"},
+      {"id": "clinical_perimeter", "bounds_norm": [0.08, 0.10, 0.92, 0.90], "purpose": "mobile secondary equipment around the sterile center", "distribution": "perimeter"}
+    ],
+    "rules": [
+      {"id": "patient_support_center", "match": {"semantic_terms": ["operating table", "surgical table", "examination bed", "patient bed"]}, "zone": "procedure_center", "distribution": "center", "preferred_yaw_deg": 0},
+      {"id": "procedure_light_center", "match": {"semantic_terms": ["shadowless lamp", "operating light"]}, "zone": "procedure_center", "distribution": "center", "preferred_yaw_deg": 0},
+      {"id": "ceiling_pendant_ring", "match": {"semantic_terms": ["ceiling pendant"]}, "zone": "overhead_ring", "distribution": "perimeter", "yaw_sequence_deg": [0, 90, 180, -90]},
+      {"id": "anesthesia_left", "match": {"semantic_terms": ["anesthesia machine"]}, "zone": "clinical_left", "distribution": "grid", "preferred_yaw_deg": 0},
+      {"id": "mobile_imaging_right", "match": {"semantic_terms": ["medical cart", "ultrasound scanner"]}, "zone": "clinical_right", "distribution": "grid", "preferred_yaw_deg": 180},
+      {"id": "iv_perimeter", "match": {"semantic_terms": ["iv pole"]}, "zone": "clinical_perimeter", "distribution": "perimeter", "preferred_yaw_deg": 0}
+    ]
+  },
+  "workflow": "workflow.md"
+}

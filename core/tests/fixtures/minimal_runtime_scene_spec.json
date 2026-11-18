@@ -1,0 +1,32 @@
+{
+  "schema_version": "isaac-scene-spec/v2",
+  "domain": "generic_scene",
+  "entities": [
+    {
+      "id": "mobile_robot",
+      "role": "mobile_robot",
+      "asset_id": "geniesim_g2_omnipicker",
+      "libraries": ["geniesim"],
+      "prim": "/World/Objects/MobileRobot",
+      "translate": [0.0, 0.0, 0.05],
+      "physics": "none"
+    }
+  ],
+  "relations": [],
+  "validation_targets": ["stage_opens", "assets_resolve"],
+  "lights": [
+    {
+      "type": "distant",
+      "prim": "/World/Lights/Key",
+      "intensity": 2500,
+      "rotate": [-45, 0, 35]
+    }
+  ],
+  "camera": {
+    "prim": "/World/Camera",
+    "translate": [4.0, -6.0, 3.0],
+    "rotate": [65.0, 0.0, 35.0],
+    "focal_length": 28
+  },
+  "physics": {"gravity": true}
+}

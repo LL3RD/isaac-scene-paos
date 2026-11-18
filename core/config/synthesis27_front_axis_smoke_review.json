@@ -1,0 +1,23 @@
+{
+  "schema_version": "synthesis27-front-axis-review/v1",
+  "assets": {
+    "eb3f275ccd4fe757": {
+      "status": "verified",
+      "front_axis": "-Y",
+      "evidence": "four-view review: labeled extinguisher-box face is visible from neg_y"
+    },
+    "a6870abf90d12036": {
+      "status": "not_applicable",
+      "evidence": "ceiling layout component has no navigation-facing direction"
+    },
+    "3ade4da883fcaeb9": {
+      "status": "pending",
+      "evidence": "robot base yaw and task/tool frame require articulation-specific review"
+    },
+    "9c0e5c65eb567981": {
+      "status": "verified",
+      "front_axis": "-Y",
+      "evidence": "four-view review: cabinet doors, warning switch and operator display are visible from neg_y"
+    }
+  }
+}

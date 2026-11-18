@@ -1,0 +1,13 @@
+{
+  "schema_version": "isaac-scene-domain/v1",
+  "name": "education_scene",
+  "description": "Classrooms, kindergartens and education interiors or bounded campus courtyards.",
+  "triggers": {
+    "en": ["classroom", "kindergarten", "school", "education room", "campus courtyard"],
+    "zh": ["教室", "幼儿园", "学校", "教育空间", "校园庭院"]
+  },
+  "roles": ["shell", "teaching_anchor", "student_furniture", "storage", "play_equipment", "circulation", "camera"],
+  "search_libraries": ["asset_catalog", "grscenes_scenes", "geniesim", "isaac_official", "curated_common"],
+  "validation_profile": "education_scene",
+  "workflow": "workflow.md"
+}

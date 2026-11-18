@@ -1,0 +1,21 @@
+# Operator state and fetched/build dependencies never belong in source control.
+.venv/
+.deps/
+.local/
+dist/
+build/
+private/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+.env
+.env.*
+*.log
+*.sqlite*
+*.db
+*.zip
+*.tar.gz
+*.egg-info/
+deployment.local.json
+/source-manifest.json

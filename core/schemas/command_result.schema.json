@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "isaac-scene-command-result/v1",
+  "type": "object",
+  "required": ["schema_version", "ok", "status", "command", "run_id", "result", "warnings", "errors"],
+  "properties": {
+    "schema_version": {"const": "isaac-scene-command-result/v1"},
+    "ok": {"type": "boolean"},
+    "status": {"enum": ["pass", "warn", "pending", "skip", "fail"]},
+    "command": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "result": {},
+    "artifacts": {"type": "array", "items": {"type": "object"}},
+    "warnings": {"type": "array", "items": {"type": "object"}},
+    "errors": {"type": "array", "items": {"type": "object"}},
+    "metrics": {"type": "object"},
+    "next_recommended_actions": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": true
+}

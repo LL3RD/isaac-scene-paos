@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "isaac-scene-spec/v2",
+  "type": "object",
+  "properties": {
+    "schema_version": {"enum": ["isaac-scene-spec/v2"]},
+    "domain": {"type": "string"},
+    "entities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "role"],
+        "properties": {
+          "id": {"type": "string"},
+          "role": {"type": "string"},
+          "logical_id": {"type": "string"},
+          "asset_id": {"type": "string"},
+          "model_id": {"type": "string"},
+          "semantic_class": {"type": "string"},
+          "canonical_class": {"type": "string"},
+          "asset_source": {"type": "string"},
+          "license_status": {"type": "string"},
+          "license_evidence": {"type": ["string", "object"]},
+          "front_axis": {"enum": ["+X", "-X", "+Y", "-Y"]},
+          "facing_target": {"type": "string"},
+          "orientation_confidence": {"enum": ["high", "medium", "low"]},
+          "orientation_source": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "relations": {"type": "array", "items": {"type": "object", "required": ["type", "subject", "target"]}},
+    "constraints": {"type": "object"},
+    "validation_targets": {"type": "array", "items": {"type": "string"}},
+    "render_feedback_policy": {
+      "type": "object",
+      "properties": {
+        "views": {
+          "type": "array",
+          "items": {"enum": ["perspective", "top_down", "asset_preview"]}
+        },
+        "max_iterations": {"type": "integer", "minimum": 0, "maximum": 2},
+        "preserve_geometry": {"const": true}
+      },
+      "additionalProperties": true
+    },
+    "stage": {
+      "type": "object",
+      "properties": {
+        "meters_per_unit": {"type": "number", "exclusiveMinimum": 0},
+        "unit_policy": {"enum": ["normalize_references", "preserve_references"]}
+      },
+      "additionalProperties": true
+    },
+    "camera": {
+      "type": "object",
+      "properties": {
+        "prim": {"type": "string"},
+        "translate": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"type": "number"}
+        },
+        "rotate": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"type": "number"}
+        },
+        "look_at": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"type": "number"}
+        },
+        "focal_length": {"type": "number", "exclusiveMinimum": 0},
+        "exposure_ev": {"type": "number", "minimum": -10, "maximum": 10},
+        "target_aspect_ratio": {"type": "number", "exclusiveMinimum": 0},
+        "render_resolution": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {"type": "integer", "minimum": 1}
+        },
+        "clipping_range": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {"type": "number"}
+        }
+      },
+      "additionalProperties": true
+    },
+    "background": {"type": "object"},
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "front_axis": {"enum": ["+X", "-X", "+Y", "-Y"]},
+          "facing_target": {"type": "string"},
+          "orientation_confidence": {"enum": ["high", "medium", "low"]},
+          "orientation_source": {"type": "string"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "fabrica_recipe": {"type": "object"}
+  },
+  "anyOf": [
+    {"required": ["entities"]},
+    {"required": ["background"]},
+    {"required": ["references"]},
+    {"required": ["fabrica_recipe"]}
+  ],
+  "additionalProperties": true
+}

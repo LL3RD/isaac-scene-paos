@@ -1,0 +1,13 @@
+{
+  "schema_version": "isaac-scene-domain/v1",
+  "name": "public_transit",
+  "description": "Subway and metro station interiors, platforms and passenger-control equipment.",
+  "triggers": {
+    "en": ["subway", "metro", "station platform", "turnstile", "platform screen door", "ticket vending"],
+    "zh": ["地铁", "轨道交通", "站台", "闸机", "屏蔽门", "售票机"]
+  },
+  "roles": ["station_shell", "platform", "column", "screen_door", "turnstile", "ticket_machine", "bench", "waste_bin", "signage", "circulation", "camera"],
+  "search_libraries": ["asset_catalog", "industrial", "isaac_official", "geniesim", "curated_common"],
+  "validation_profile": "public_transit",
+  "workflow": "workflow.md"
+}

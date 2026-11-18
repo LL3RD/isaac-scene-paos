@@ -1,0 +1,10 @@
+{
+  "schema_version": "isaac-scene-ontology/v1",
+  "synonyms": {
+    "中岛货架": ["gondola shelf", "retail island shelf"],
+    "墙面货架": ["wall retail shelf", "store shelf"],
+    "收银台": ["checkout counter", "cashier counter"],
+    "冷藏柜": ["refrigerated display", "commercial refrigerator"],
+    "商品": ["merchandise", "packaged goods"]
+  }
+}

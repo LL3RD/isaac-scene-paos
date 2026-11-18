@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "deployment_configured": false,
+  "runtime": {},
+  "libraries": [],
+  "search_policy": {"default_libraries": [], "allow_slow_fallback_by_default": false},
+  "semantic_catalog": {"read_only_adapters": []}
+}

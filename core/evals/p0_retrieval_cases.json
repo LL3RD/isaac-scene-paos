@@ -1,0 +1,35 @@
+{
+  "schema_version": "isaac-scene-retrieval-eval/v1",
+  "cases": [
+    {
+      "id": "wheeled_humanoid_zh",
+      "query": "轮式人形机器人",
+      "types": ["robot"],
+      "expected_top_asset_id": "geniesim_g2_omnipicker"
+    },
+    {
+      "id": "home_sofa_zh",
+      "query": "沙发",
+      "types": ["object"],
+      "expected_top_contains": "sofa"
+    },
+    {
+      "id": "fabrica_car_bundle",
+      "query": "Fabrica car assembly",
+      "types": ["assembly_set"],
+      "expected_top_asset_id": "fabrica_car_official_set_sdf001"
+    },
+    {
+      "id": "simple_warehouse",
+      "query": "simple warehouse",
+      "types": ["environment", "background"],
+      "expected_top_asset_id": "simple_warehouse"
+    },
+    {
+      "id": "kitchen_background_zh",
+      "query": "厨房背景",
+      "types": ["background"],
+      "expected_top_contains": "kitchen"
+    }
+  ]
+}

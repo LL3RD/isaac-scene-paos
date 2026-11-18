@@ -1,0 +1,10 @@
+{
+  "schema_version": "isaac-scene-ontology/v1",
+  "synonyms": {
+    "屏蔽门": ["platform screen door", "PSD"],
+    "闸机": ["turnstile", "fare gate"],
+    "售票机": ["ticket vending machine", "TVM"],
+    "站台座椅": ["platform bench", "station bench"],
+    "导向牌": ["wayfinding sign", "station signage"]
+  }
+}

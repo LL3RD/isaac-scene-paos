@@ -1,0 +1,40 @@
+{
+    "schema_version": "isaac-scene-domain/v1",
+    "name": "warehouse_logistics",
+    "description": "Warehouses, racks, pallets, AMRs, transport paths, and loading zones.",
+    "triggers": {
+        "en": [
+            "warehouse",
+            "logistics",
+            "rack",
+            "pallet",
+            "forklift",
+            "amr"
+        ],
+        "zh": [
+            "\u4ed3\u5e93",
+            "\u7269\u6d41",
+            "\u8d27\u67b6",
+            "\u6258\u76d8",
+            "\u53c9\u8f66",
+            "\u642c\u8fd0"
+        ]
+    },
+    "roles": [
+        "background",
+        "rack",
+        "pallet",
+        "mobile_robot",
+        "load",
+        "destination",
+        "camera"
+    ],
+    "search_libraries": [
+        "curated_common",
+        "industrial",
+        "isaac_official",
+        "geniesim"
+    ],
+    "validation_profile": "warehouse_logistics",
+    "workflow": "workflow.md"
+}

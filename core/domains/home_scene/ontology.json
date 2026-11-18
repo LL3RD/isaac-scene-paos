@@ -1,0 +1,29 @@
+{
+  "schema_version": "isaac-scene-ontology/v1",
+  "synonyms": {
+    "厨房": ["kitchen", "dining kitchen"],
+    "客厅": ["living room"],
+    "卧室": ["bedroom"],
+    "书房": ["study", "home office"],
+    "餐厅": ["dining room"],
+    "沙发": ["sofa", "couch", "sofachair"],
+    "茶几": ["coffee table"],
+    "电视": ["television", "tv", "screen"],
+    "电视柜": ["tv stand", "media console", "tv cabinet"],
+    "书桌": ["desk", "study table"],
+    "椅子": ["chair"],
+    "书架": ["bookshelf", "bookcase"],
+    "床": ["bed"],
+    "床头柜": ["nightstand", "bedside table"],
+    "衣柜": ["wardrobe", "closet"],
+    "冰箱": ["refrigerator", "fridge"],
+    "洗衣机": ["washing machine", "laundry appliance"],
+    "爆米花机": ["popcorn machine", "commercial kitchen appliance"],
+    "炉灶": ["stove", "oven", "cooktop"],
+    "水槽": ["sink"],
+    "台灯": ["table lamp", "desk lamp"],
+    "植物": ["plant", "potted plant"],
+    "杯子": ["mug", "cup"],
+    "书": ["book"]
+  }
+}
