@@ -47,7 +47,8 @@ def write(path, value):
 
 
 def digest(path):
-    return hashlib.file_digest(path.open("rb"), "sha256").hexdigest()
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
 def portable_member(info):
@@ -59,18 +60,59 @@ def portable_member(info):
     return info
 
 
+def write_skill(bundle, source, nodes, version, resolver="local"):
+    """Generate the same profile for local review and exact Registry locks."""
+    if resolver not in {"local", "registry"} or set(nodes) != {"provider", "gateway"}:
+        raise ValueError("Expected local/registry resolver and both Node locks")
+    bundle.mkdir(parents=True, exist_ok=False)
+    profile = bundle / "profiles/local-review"
+    profile.mkdir(parents=True)
+    for name in ("SKILL.md", "LICENSE", "NOTICE", "deployment.example.json"):
+        shutil.copy2(source / name, bundle / name)
+    write(profile / "gateway.yaml", {"host": "127.0.0.1", "port": 19043, "joint_order": [],
+        "tools": {"enabled": True, "invoke_timeout_ms": 900000, "lease_ttl_ms": 15000,
+            "providers": [{"endpoint_id": ENDPOINT, "input_id": "provider/to_gateway", "output_id": "to_provider"}],
+            "specs": tool_specs()}})
+    write(profile / "zenoh.json", {"listen": {"endpoints": ["tcp/127.0.0.1:0"]},
+        "scouting": {"multicast": {"enabled": False}, "gossip": {"enabled": False}}})
+    write(profile / "dataflow.yaml", {"nodes": [
+        {"id": "gateway", "path": "${FORGE_RUNTIME_BIN}/" + nodes["gateway"]["entrypoint"],
+         "args": "--config gateway.yaml", "inputs": {"provider/to_gateway": {"source": "provider/to_gateway", "queue_size": 128}},
+         "outputs": ["to_provider"]},
+        {"id": "provider", "path": "${FORGE_RUNTIME_BIN}/" + nodes["provider"]["entrypoint"],
+         "inputs": {"from_gateway": {"source": "gateway/to_provider", "queue_size": 128},
+                       "heartbeat": "dora/timer/millis/2000"}, "outputs": ["to_gateway"]}]})
+    write(bundle / "skill.yaml", {"manifest_version": 2, "name": "isaac-scene-paos", "version": version,
+        "description": "Isaac scene review provider with immutable revisions; external Agent planning.",
+        "skill_document": "SKILL.md", "gateway_url": "http://127.0.0.1:19043",
+        "required_tools": [s["tool_id"] for s in tool_specs()],
+        "profiles": {"local-review": {"dataflow": "profiles/local-review/dataflow.yaml", "startup_timeout_s": 60,
+            "required_binaries": [n["entrypoint"] for n in nodes.values()],
+            "required_assets": ["profiles/local-review/gateway.yaml", "profiles/local-review/zenoh.json"],
+            "required_environment": ["ISAAC_SCENE_DEPLOYMENT", "ZENOH_CONFIG"], "environment": {}}},
+        "artifacts": {"resolver": resolver, "nodes": nodes}})
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--gateway-source", type=Path, required=True)
     parser.add_argument("--core-source", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--repository-url", required=True)
-    parser.add_argument("--tag", required=True)
+    parser.add_argument("--tag")
+    parser.add_argument("--candidate", action="store_true",
+                        help="non-publishable development build; records source snapshot, no tag needed")
     args = parser.parse_args()
     if (platform.system(), platform.machine()) != ("Linux", "x86_64"):
         parser.error("build on the target Linux x86_64 host")
     inventory = audit()
-    source_identity = provenance(args.repository_url, args.tag)
+    if args.candidate:
+        if args.tag:
+            parser.error("candidate builds cannot claim a release tag")
+        source_identity = {"repository": args.repository_url, "commit": git("rev-parse", "HEAD"),
+                           "tag": None, "dirty": bool(git("status", "--porcelain"))}
+    else:
+        source_identity = provenance(args.repository_url, args.tag)
     verify_checkout("gateway", args.gateway_source)
     verify_checkout("paos", args.core_source)
     locked_packages = dict(line.split(" --hash=", 1)[0].split("==", 1) for line in
@@ -121,7 +163,9 @@ def main():
     targets = (
         ("provider", "isaac_scene_provider", source / "node.py",
          ["--add-data", f"{source / 'worker.py'}:.", "--add-data", f"{source / 'catalog.py'}:.",
-          "--add-data", f"{source / 'contracts.py'}:.", "--collect-submodules", "forge_tool"]),
+          "--add-data", f"{source / 'contracts.py'}:.",
+          "--add-data", f"{snapshot / 'core'}:scene_core", "--hidden-import", "smoke",
+          "--collect-submodules", "forge_tool"]),
         ("gateway", "isaac_scene_gateway", gateway / "src/forge_gateway/__main__.py",
          ["--add-data", f"{gateway / 'src/forge_gateway/resources'}:forge_gateway/resources",
           "--collect-submodules", "forge_gateway", "--collect-submodules", "uvicorn",
@@ -132,6 +176,7 @@ def main():
                    "--name", name, "--distpath", str(root / "binaries"),
                    "--workpath", str(root / "build" / name), "--specpath", str(root / "build"),
                    "--paths", str(gateway / "src"), "--paths", str(source),
+                   "--paths", str(snapshot / "scripts"),
                    "--hidden-import", "dora", "--hidden-import", "pyarrow",
                    "--collect-submodules", "forge_msgs", *extra, str(entry)]
         with (root / f"{name}.build.log").open("x") as log:
@@ -147,44 +192,18 @@ def main():
             "version": VERSION, "platform": "linux", "arch": "x86_64",
             "artifact_type": "directory_tar_gz", "entrypoint": name, "sha256": digest(archive)}
     bundle = root / "isaac-scene-paos"
-    profile = bundle / "profiles/local-review"
-    profile.mkdir(parents=True)
-    shutil.copy2(snapshot / "SKILL.md", bundle / "SKILL.md")
-    for name in ("LICENSE", "NOTICE"):
-        shutil.copy2(snapshot / name, bundle / name)
-    specs = tool_specs()
-    write(profile / "gateway.yaml", {"host": "127.0.0.1", "port": 19043, "joint_order": [],
-        "tools": {"enabled": True, "invoke_timeout_ms": 900000, "lease_ttl_ms": 15000,
-            "providers": [{"endpoint_id": ENDPOINT, "input_id": "provider/to_gateway", "output_id": "to_provider"}],
-            "specs": specs}})
-    write(profile / "zenoh.json", {"listen": {"endpoints": ["tcp/127.0.0.1:0"]},
-        "scouting": {"multicast": {"enabled": False}, "gossip": {"enabled": False}}})
-    write(profile / "dataflow.yaml", {"nodes": [
-        {"id": "gateway", "path": "${FORGE_RUNTIME_BIN}/isaac_scene_gateway",
-         "args": "--config gateway.yaml", "inputs": {"provider/to_gateway": {"source": "provider/to_gateway", "queue_size": 128}},
-         "outputs": ["to_provider"]},
-        {"id": "provider", "path": "${FORGE_RUNTIME_BIN}/isaac_scene_provider",
-         "inputs": {"from_gateway": {"source": "gateway/to_provider", "queue_size": 128},
-                    "heartbeat": "dora/timer/millis/2000"}, "outputs": ["to_gateway"]}]})
-    write(bundle / "skill.yaml", {"manifest_version": 2, "name": "isaac-scene-paos", "version": VERSION,
-        "description": "Local Isaac scene review provider with immutable revisions; external Agent planning.",
-        "skill_document": "SKILL.md", "gateway_url": "http://127.0.0.1:19043",
-        "required_tools": [s["tool_id"] for s in specs],
-        "profiles": {"local-review": {"dataflow": "profiles/local-review/dataflow.yaml", "startup_timeout_s": 60,
-            "required_binaries": [n["entrypoint"] for n in nodes.values()],
-            "required_assets": ["profiles/local-review/gateway.yaml", "profiles/local-review/zenoh.json"],
-            "required_environment": ["ISAAC_SCENE_DEPLOYMENT", "ZENOH_CONFIG"], "environment": {}}},
-        "artifacts": {"resolver": "local", "nodes": nodes}})
+    write_skill(bundle, snapshot, nodes, VERSION)
     package_env = {**os.environ, "PYTHONPATH": str(core)}
     subprocess.run([sys.executable, str(core / "scripts/package_skill.py"), str(bundle),
                     "--output-dir", str(root / "skill-archive")], env=package_env, check=True)
     write(root / "release.json", {"version": VERSION, "platform": platform.platform(),
         "python": platform.python_version(), "packages": dict(packages),
-        "source": source_identity,
+        "source": source_identity, "candidate": args.candidate,
         "build": {"entrypoint": "adapter/build_release.py", "mode": "manual",
             "reproduction_command": ["python", "adapter/build_release.py", "--gateway-source", ".deps/gateway",
                 "--core-source", ".deps/paos", "--output", ".local/build-01",
-                "--repository-url", args.repository_url, "--tag", args.tag],
+                "--repository-url", args.repository_url,
+                *(["--candidate"] if args.candidate else ["--tag", args.tag])],
             "source_test_workflow": {"path": ".github/workflows/checks.yml",
                 "revision": source_identity["commit"], "execution": "not asserted by builder"}},
         "sources": {r["path"]: r["sha256"] for r in inventory["files"]},

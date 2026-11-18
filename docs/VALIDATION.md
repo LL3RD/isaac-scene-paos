@@ -1,5 +1,47 @@
 # Validation record
 
+## Platform adaptation — 2026-11-18
+
+Source version: `0.4.2-dev`. The initial source commit is public; this phase is
+not a tagged release or platform registration. The engine's 196-file lock is
+unchanged. Runtime changes are packaged-engine discovery and the native smoke
+entrypoint; previous runtime acceptance is not inherited without testing.
+
+| Check | Observed result | Boundary |
+| --- | --- | --- |
+| Repository/release tests | 12 passed on Linux | Includes exact Registry metadata/download checks and upstream packager integration using mocked Registry records; no live platform verification |
+| Core in provider Python | 300 run, 250 passed, 50 skipped | USD-dependent tests skipped in this environment |
+| Provider tests | 30 passed | Existing contracts, lifecycle and provenance regression |
+| Native candidate build | Pass | Both Linux directory Nodes and local-resolver Skill built; upstream packager validated the Skill archive |
+| Native relocated Provider smoke | Pass | Extracted candidate Node archive into a new directory; no `core_root`, real Isaac interpreter and generated mesh assets |
+| Skill frontmatter | Pass | Validated updated root Skill in the locked provider environment |
+
+The native smoke exercised retrieval, composition, initial floating-support
+failure, support solving, validation, immutable revisions, descendant closure,
+frozen objects, obstacle accumulation and persistent quarantine. The worker used
+the engine in the extracted Node, not the source checkout. Rendering, Gateway
+transport, AgentTask, physics and reachability were **not run** by this smoke.
+Native candidate builds are explicitly refused by platform preparation.
+
+Raw Node archive members contained no bytecode caches and no matches for the two
+checked private workspace prefixes. This is a targeted string check, not a
+comprehensive binary/secrets audit. Running the extracted worker can create
+local Python caches; never repack a used installation as a release artifact.
+
+Local macOS test/Skill-validator attempts lacked `jsonschema`/`PyYAML`; the full
+checks above ran on the locked Linux environment instead. The first isolated
+Linux setup used a top-level dependency symlink which the source audit correctly
+rejected. Replacing it with an ignored dependency directory fixed the setup;
+the final suite has no failures. Raw attempts remain private, not evidence of
+platform acceptance.
+
+The initial source commit's GitHub CI succeeded. Updated publication changes
+still require their own CI run. Actual Registry metadata schema/permissions,
+registered Node downloads, final Skill installation and a successful-run video
+bound to that exact bundle remain release gates. No platform upload occurred.
+
+## Historical source preparation — 2026-11-15
+
 Date: 2026-11-15. Source version: `0.4.1-dev`. No own Git commit/tag, new native
 release, remote repository, PR or resource-platform submission has been created.
 Use the generated source ZIP's `source-manifest.json` to identify exact files.

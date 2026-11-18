@@ -12,6 +12,22 @@ import copy
 from catalog import Catalog
 
 
+def core_scripts(config, location=None):
+    """Resolve the packaged engine first; source runs may use an operator override."""
+    location = Path(location or __file__).resolve().parent
+    bundled = location / "scene_core"
+    if bundled.is_dir():
+        if config.get("core_root"):
+            raise ValueError("Packaged provider uses its locked engine; omit core_root")
+        root = bundled
+    else:
+        root = Path(config["core_root"]) if config.get("core_root") else location.parent / "core"
+    scripts = root.resolve() / "scripts"
+    if not (scripts / "scene_tools.py").is_file():
+        raise ValueError("Scene engine is unavailable; check the provider installation")
+    return scripts
+
+
 def write(path, value):
     with path.open("x") as stream:
         json.dump(value, stream, indent=2, allow_nan=False)
@@ -26,7 +42,7 @@ def main():
     request = json.loads(args.request.read_text())
     op, parameters = request["operation"], request["arguments"]
     directory = Path(request["job_dir"])
-    scripts = Path(config["core_root"]) / "scripts"
+    scripts = core_scripts(config)
     sys.path.insert(0, str(scripts))
     import scene_tools
     catalog = Catalog(config)

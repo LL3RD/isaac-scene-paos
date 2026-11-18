@@ -1,5 +1,4 @@
 {
-  "core_root": "/path/to/isaac-scene-paos/core",
   "isaac_python": "/path/to/isaac-runtime/bin/python",
   "work_root": "/path/to/private/scene-jobs",
   "gpu_lock": "/path/to/private/shared-gpu0.lock",

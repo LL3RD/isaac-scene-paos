@@ -35,7 +35,7 @@ def box_mesh(size):
             '  color3f[] primvars:displayColor = [(0.24,0.48,0.65)]\n }\n}\n')
 
 
-def prepare(output, interpreter):
+def prepare(output, interpreter, *, bundled_core=False):
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
     os.chmod(output, 0o700)
@@ -52,6 +52,8 @@ def prepare(output, interpreter):
     config = {"core_root": str(ROOT / "core"), "isaac_python": str(Path(interpreter).absolute()),
               "work_root": str(output / "jobs"), "gpu_lock": str(output / "gpu.lock"),
               "gpu_index": 0, "job_timeout_s": 180, "assets": assets}
+    if bundled_core:
+        del config["core_root"]
     write(output / "deployment.json", config)
     layout = {"floor_size_m": [5, 4], "camera": {"position_m": [3.5, -4.5, 3.1],
         "look_at_m": [0, 0, .9], "focal_length_mm": 22}, "entities": [

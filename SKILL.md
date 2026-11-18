@@ -5,8 +5,9 @@ description: Generate, revise, inspect and render review scenes through the PhyA
 
 # Isaac scene provider
 
-This repository can build a manifest-v2 bundle and Linux x86_64 Node artifacts.
-Read `VERSION` for the source version. It is not a registry-published or sandboxed service.
+This Skill uses a manifest-v2 bundle and Linux x86_64 Node artifacts.
+Read the installed `skill.yaml` for the version, resolver and exact Node locks.
+Source availability or installation alone does not prove platform publication.
 Use only a trusted single-user local deployment. The Gateway must remain on
 loopback or behind the operator's authenticated access boundary.
 
@@ -57,8 +58,10 @@ asset archives or start a Viewer.
 ## Execution boundaries
 
 - No shell, Python code, arbitrary path, download URL or secret is accepted by tools.
-- The host operator supplies the USD runtime and reviewed asset registry. Use
-  this repository's locked `core/` as `core_root`; no private core ZIP is needed.
+- The host operator supplies the USD runtime and reviewed asset registry. The
+  packaged provider carries its locked scene engine; omit `core_root` from its
+  deployment configuration. It rejects external engine overrides. Source-only
+  development can use the repository's `core/` or an explicit operator override.
   Native USD/MDL dependencies are trusted, not sandboxed.
 - Outputs go into fresh job directories. Editing never overwrites a revision.
 - Actions support status/result/cancel. Cancel acceptance is not termination;
@@ -79,31 +82,23 @@ asset archives or start a Viewer.
   readiness is certified. `scene_validate` currently checks dependencies and
   declared supports, not a complete overlap/material/physics acceptance gate.
 
-## Operator entry points
+## Operator setup
 
-`adapter/catalog.py` owns read-only retrieval and live policy checks. The Synthesis
-adapter requires callable/ready/verified rows in the operator-approved use scope
+The Synthesis adapter requires callable/ready/verified rows in the operator-approved use scope
 and independent-object/robot scope. General semantic catalogs require an exact
 reviewed-ID allowlist; broad callable flags alone are insufficient. Root allowlists
 restrict entrypoints, not transitive USD/MDL dependencies. This is not sandboxing.
-`contracts.py` owns schemas; `service.py` owns jobs and resources; `worker.py`
-calls the existing clean core; `node.py` owns Dora and emits a local source
-profile. `test_adapter.py` exercises benign contracts and lifecycle behavior.
-`lifecycle.py` owns Linux per-job process cleanup. This cooperative marker is not
+Per-job process cleanup uses cooperative markers, not
 OS containment: a child that strips it is outside this guarantee. Native SDK
 telemetry/network behavior remains an operator deployment concern; this change
 does not disable telemetry or certify an offline runtime.
 
-Read `README.md` for reproducible setup, source tests and the synthetic demo.
-Set `PYTHONPATH` to `.deps/gateway/src` for its pinned bundled `forge_tool` SDK.
-Install `requirements.lock` into a separate provider environment, not Isaac's.
-Run `python scripts/repository.py test` from the repository root.
-Use `python adapter/node.py --help` to generate a fresh local profile from operator
-paths. Source profiles are not immutable, distributable Node artifact locks.
-For the packaged profile, the operator sets `ISAAC_SCENE_DEPLOYMENT` to a private
-deployment JSON. The bundle contains no USD libraries, Isaac installation or
-credentials. Both Node archives must be installed and verified against the locks
-in `skill.yaml`; use `forge-node install --archive` and `forge-node verify`.
+Copy `deployment.example.json` to an operator-owned private location, replace its
+placeholder runtime/work paths, and configure only reviewed assets/catalogs.
+Set `ISAAC_SCENE_DEPLOYMENT` to that JSON. The bundle contains no external USD
+libraries, Isaac installation or credentials. Both Node archives must be verified
+against the locks in `skill.yaml`: a registry bundle resolves registered Nodes;
+a local bundle needs `forge-node install --archive` and `forge-node verify`.
 The `local-review` profile uses Gateway `127.0.0.1:19043`.
 
 Before `paos skill start`, set `ZENOH_CONFIG` to the installed profile's
@@ -118,12 +113,12 @@ invoke through that coordinator and reconcile terminal results before finalize.
 Record the semantic verifier mode: `off` finalizes execution facts only, not
 visual realism, physical validity or the user's complete assembly objective.
 
-For a local source run, set `ZENOH_CONFIG` to the generated `zenoh.json` **in
-the Dora process environment**, keep `PYTHONPATH` pointed at the pinned Gateway
-SDK, and run `dora run dataflow.yaml` from that profile. Verify listeners are
-loopback-only before invoking tools. Do not rely on Dora's network defaults.
-The generated launcher preserves virtualenv identity despite Dora 0.4.1's
-executable-path canonicalization. Stop this dataflow when testing is finished.
+For source development and publication steps, see the
+[source repository](https://github.com/LL3RD/isaac-scene-paos). Those development
+files are not required inside an installed Skill. Publication is a separate
+operator workflow: do not upload, register or release resources while carrying
+out an ordinary scene-generation request. Verify listeners are loopback-only
+before invoking tools. Stop the dataflow when testing is finished.
 Both Tool message inputs use `queue_size: 128`; do not replace them with Dora
 0.4.1's default one-message queue. This is bounded buffering, not a durable
 transport guarantee. Reconcile status after any lost/ambiguous control response.

@@ -126,10 +126,19 @@ if __name__ == "__main__":
     parser.add_argument("--gateway", type=Path)
     parser.add_argument("--python", type=Path)
     parser.add_argument("--port", type=int, default=19042)
+    parser.add_argument("--smoke-test", type=Path, metavar="NEW_OUTPUT_DIR",
+                        help="run generated-mesh service/worker checks, not Gateway or physics")
+    parser.add_argument("--isaac-python", type=Path)
     args = parser.parse_args()
-    if args.config is None:
+    if args.smoke_test:
+        if not args.isaac_python:
+            parser.error("--smoke-test requires --isaac-python")
+        from smoke import prepare, exercise
+        output, layout = prepare(args.smoke_test, args.isaac_python, bundled_core=True)
+        asyncio.run(exercise(output, layout))
+    elif args.config is None:
         parser.error("set ISAAC_SCENE_DEPLOYMENT or pass --config (operator configuration)")
-    if args.write_profile:
+    elif args.write_profile:
         if not args.gateway or not args.python:
             parser.error("profile generation requires --gateway and --python")
         write_profile(args)

@@ -29,14 +29,15 @@ adapter/       contracts, catalogs, service, worker, Dora binding, tests and bui
 core/          unchanged clean scene engine, its resources and regression tests
 scripts/       repository checks/setup/export and a self-contained smoke demo
 tests/         repository packaging tests
-docs/          PR draft and validation record
+docs/          publishing workflow, PR draft and validation record
 SKILL.md       external Agent workflow and execution boundaries
 ```
 
 `core/` contains 196 source/resource files retained intact to preserve internal
 imports, CLI resources and regression tests. Its per-file hashes are in
 `core.lock.json`; the historical ZIP hash in `upstream.lock.json` is provenance,
-not a dependency that users must find. This is a source integration, not a wheel.
+not a dependency that users must find. Native provider builds include this engine;
+Isaac itself and reviewed asset libraries remain external. This is not a wheel.
 `adapter/contracts.py` is the single ToolSpec/schema source; profiles/manifests
 are generated, not maintained as duplicate API definitions.
 
@@ -140,10 +141,17 @@ will not work until VERSION/commit/tag requirements are met. Build on Linux x86_
 using standalone Python, not Conda/Isaac's Python. It produces provider and
 Gateway archives, a manifest-v2 Skill, source ZIP, dependency notices and
 `release.json` with source commit/tag, upstream pins, file hashes and artifact
-sizes/SHA256. Source ZIP includes the core; Native workers still use the external
-Isaac interpreter and configured checkout. Generated build logs are private.
+sizes/SHA256. Native workers use the external Isaac interpreter with their bundled
+locked engine; omit `core_root` in packaged deployments. Source runs retain an
+optional engine override. Generated build logs are private.
 Scan native archives before redistribution. Native builds are traceable, **not
 claimed bit-for-bit reproducible**; timestamps/toolchain may change binary bytes.
+
+For a development native check, use `--candidate` instead of `--tag`; candidate
+artifacts cannot prepare platform registration. See [Publishing](docs/PUBLISHING.md)
+for Node registration inputs, verified Registry locks and exact-bundle evidence.
+The helper only prepares files and performs read-only Registry verification;
+it never uploads, registers, approves or publishes resources.
 
 For a deterministic source-only handoff, no commit is required:
 

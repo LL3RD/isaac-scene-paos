@@ -23,6 +23,10 @@ owns deterministic execution. No Core or Gateway source modification is required
   commits, dependency versions, bilingual documentation and Apache-2.0 licensing.
 - Add a self-contained synthetic-mesh worker smoke test and deterministic source
   export. Release builds require clean tagged source and record artifact digests.
+- Package the locked scene engine with the Provider, with a relocated native
+  smoke entrypoint. Prepare registration inputs separately, verify public Node
+  metadata and download digests, then build Registry-locked Skills and bind
+  operator-supplied real-run evidence. No upload/publication command is included.
 
 ## Review map
 
